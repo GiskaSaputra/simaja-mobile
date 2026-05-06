@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
-import 'register_screen.dart';
-import 'main_screen.dart';
-import 'forgot_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ForgotScreen extends StatefulWidget {
+  const ForgotScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgotScreen> createState() => _ForgotScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _ForgotScreenState extends State<ForgotScreen> {
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +20,31 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white, // Background dasar bawah (Putih)
       body: Stack(
         children: [
-          // 1. BACKGROUND HIJAU ATAS (Tetap diam di belakang)
+          // 1. BACKGROUND HIJAU ATAS (Melengkung di sudut bawah)
           Container(
-            height: height * 0.45, // Mengambil 45% dari tinggi layar
+            height: height * 0.45,
             decoration: const BoxDecoration(
               color: AppTheme.primaryGreen,
               borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(40), // Melengkung di sudut bawah
+                bottom: Radius.circular(40),
               ),
             ),
           ),
 
-          // 2. KONTEN UTAMA DAN SEGITIGA BAWAH (Sekarang semua ikut ke-scroll)
+          // 2. KONTEN UTAMA DAN SEGITIGA BAWAH (Ikut ke-scroll)
           SafeArea(
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return SingleChildScrollView(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight, // Memastikan area minimal setinggi layar HP
+                      minHeight: constraints.maxHeight,
                     ),
                     child: IntrinsicHeight(
                       child: Column(
                         children: [
                           
                           // --- BAGIAN KONTEN ATAS (Form, Teks, Tombol) ---
-                          // Menggunakan Expanded agar jika ada ruang kosong, konten ini akan mendorong segitiga mentok ke bawah
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
@@ -71,19 +66,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   const SizedBox(height: 20),
                                   
-                                  // Logo "by PROTIC" 
+                                  // Logo "by PROTIC"
                                   Center(
                                     child: Padding(
-                                      padding: const EdgeInsets.only(right: 20.0), 
+                                      padding: const EdgeInsets.only(right: 20.0),
                                       child: Image.asset(
                                         'lib/assets/by_protik.png',
-                                        height: 65, 
+                                        height: 65,
                                       ),
                                     ),
                                   ),
                                   const SizedBox(height: 30),
 
-                                  // Card Form
+                                  // Card Form Lupa Password
                                   Card(
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                                     elevation: 8,
@@ -95,37 +90,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                           // Logo di dalam Card
                                           Image.asset(
                                             'lib/assets/logo_protik.png',
-                                            height: 95, 
+                                            height: 95,
                                           ),
-                                          const SizedBox(height: 30),
+                                          const SizedBox(height: 20),
 
-                                          // Input Username
-                                          TextField(
-                                            controller: _usernameController,
+                                          // Teks Instruksi
+                                          const Text(
+                                            'No problem! Enter your email below and we will send instructions to reset your password',
                                             textAlign: TextAlign.center,
-                                            decoration: InputDecoration(
-                                              hintText: 'Username',
-                                              hintStyle: const TextStyle(color: Colors.grey),
-                                              contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(8),
-                                                borderSide: const BorderSide(color: Colors.grey),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(8),
-                                                borderSide: const BorderSide(color: AppTheme.primaryGreen, width: 2),
-                                              ),
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black87,
                                             ),
                                           ),
-                                          const SizedBox(height: 16),
+                                          const SizedBox(height: 24),
 
-                                          // Input Password
+                                          // Input Email
                                           TextField(
-                                            controller: _passwordController,
-                                            obscureText: true,
-                                            textAlign: TextAlign.center, 
+                                            controller: _emailController,
+                                            textAlign: TextAlign.center, // Teks rata tengah sesuai desain
                                             decoration: InputDecoration(
-                                              hintText: 'Password',
+                                              hintText: 'Email',
                                               hintStyle: const TextStyle(color: Colors.grey),
                                               contentPadding: const EdgeInsets.symmetric(vertical: 16),
                                               enabledBorder: OutlineInputBorder(
@@ -144,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   const SizedBox(height: 25),
 
-                                  // Tombol Login (Di Luar Card)
+                                  // Tombol Send Instructions (Di Luar Card)
                                   SizedBox(
                                     width: double.infinity,
                                     height: 50,
@@ -156,46 +142,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                         elevation: 4,
                                       ),
                                       onPressed: () {
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => const MainScreen()),
-                                        );
+                                        // TODO: Logika kirim email reset password
                                       },
-                                      child: const Text('Login', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                      child: const Text('Send Instructions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                     ),
                                   ),
                                   const SizedBox(height: 20),
 
-                                  // Teks Link Bawah (Need an account & Forgot Password)
+                                  // Teks Link Bawah (Back to login)
                                   Center(
-                                    child: Column(
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(builder: (context) => const RegisterScreen()),
-                                            );
-                                          },
-                                          child: const Text(
-                                            'Need an account?',
-                                            style: TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(builder: (context) => const ForgotScreen()),
-                                            );
-                                          },
-                                          child: const Text(
-                                            'Forget your password?',
-                                            style: TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.pop(context); // Kembali ke halaman Login
+                                      },
+                                      child: const Text(
+                                        'Back to login',
+                                        style: TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.w500),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -206,10 +169,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           // --- BAGIAN SEGITIGA BAWAH ---
                           SizedBox(
                             width: double.infinity,
-                            // Hapus batasan height agar tidak kepotong, biarkan proporsinya alami
                             child: Image.asset(
                               'lib/assets/segitiga.png',
-                              fit: BoxFit.fitWidth, // Ganti jadi fitWidth agar proporsi segitiga utuh dari kiri ke kanan
+                              fit: BoxFit.fitWidth,
                               alignment: Alignment.bottomCenter,
                             ),
                           ),

@@ -16,97 +16,206 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Mengambil ukuran tinggi layar untuk membagi background
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      backgroundColor: AppTheme.primaryGreen,
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'SIMAJA',
-                  style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
-                ),
-                const Text(
-                  'Sistem Manajemen Study Jam',
-                  style: TextStyle(color: Colors.white70, fontSize: 16),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'by PROTIC',
-                  style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 40),
-                Card(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  elevation: 8,
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      children: [
-                        const Icon(Icons.account_tree, size: 60, color: AppTheme.primaryGreen),
-                        const SizedBox(height: 30),
-                        TextField(
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        TextField(
-                          controller: _usernameController,
-                          decoration: InputDecoration(
-                            labelText: 'Username',
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        TextField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        TextField(
-                          controller: _repeatPasswordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            labelText: 'Repeat Password',
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppTheme.primaryGreen,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            ),
-                            onPressed: () {},
-                            child: const Text('Daftar', style: TextStyle(fontSize: 18)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: const Text('Already registered? Sign in', style: TextStyle(color: Colors.white)),
-                ),
-              ],
+      backgroundColor: Colors.white, // Background dasar bawah (Putih)
+      body: Stack(
+        children: [
+          // 1. BACKGROUND HIJAU ATAS (Melengkung di sudut bawah)
+          Container(
+            height: height * 0.45,
+            decoration: const BoxDecoration(
+              color: AppTheme.primaryGreen,
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(40), 
+              ),
             ),
           ),
+
+          // 2. KONTEN UTAMA DAN SEGITIGA BAWAH (Ikut ke-scroll)
+          SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight, 
+                    ),
+                    child: IntrinsicHeight(
+                      child: Column(
+                        children: [
+                          
+                          // --- BAGIAN KONTEN ATAS (Form, Teks, Tombol) ---
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri untuk Header
+                                children: [
+                                  // Header
+                                  const Text(
+                                    'SIMAJA',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Sistem Manajemen Study Jam',
+                                    style: TextStyle(color: Colors.white, fontSize: 14),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  
+                                  // Logo "by PROTIC" 
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 20.0), 
+                                      child: Image.asset(
+                                        'lib/assets/by_protik.png',
+                                        height: 65, 
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+
+                                  // Card Form Register
+                                  Card(
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                    elevation: 8,
+                                    color: Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
+                                      child: Column(
+                                        children: [
+                                          // Logo di dalam Card
+                                          Image.asset(
+                                            'lib/assets/logo_protik.png',
+                                            height: 95, 
+                                          ),
+                                          const SizedBox(height: 30),
+
+                                          // Input Email
+                                          _buildTextField(
+                                            controller: _emailController,
+                                            hintText: 'Email',
+                                            isObscure: false,
+                                          ),
+                                          const SizedBox(height: 16),
+
+                                          // Input Username
+                                          _buildTextField(
+                                            controller: _usernameController,
+                                            hintText: 'Username',
+                                            isObscure: false,
+                                          ),
+                                          const SizedBox(height: 16),
+
+                                          // Input Password
+                                          _buildTextField(
+                                            controller: _passwordController,
+                                            hintText: 'Password',
+                                            isObscure: true,
+                                          ),
+                                          const SizedBox(height: 16),
+
+                                          // Input Repeat Password
+                                          _buildTextField(
+                                            controller: _repeatPasswordController,
+                                            hintText: 'Repeat Password',
+                                            isObscure: true,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 25),
+
+                                  // Tombol Daftar (Di Luar Card)
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppTheme.primaryGreen,
+                                        foregroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                        elevation: 4,
+                                      ),
+                                      onPressed: () {
+                                        // TODO: Logika Register API
+                                      },
+                                      child: const Text('Daftar', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+
+                                  // Teks Link Bawah (Already registered? Sign in)
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        'Already registered? ',
+                                        style: TextStyle(fontWeight: FontWeight.w600),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context); // Kembali ke halaman Login
+                                        },
+                                        child: const Text(
+                                          'Sign in',
+                                          style: TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          // --- BAGIAN SEGITIGA BAWAH ---
+                          SizedBox(
+                            width: double.infinity,
+                            child: Image.asset(
+                              'lib/assets/segitiga.png',
+                              fit: BoxFit.fitWidth, 
+                              alignment: Alignment.bottomCenter,
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper Widget untuk membuat TextField agar kodingan tidak terlalu panjang dan berulang
+  Widget _buildTextField({required TextEditingController controller, required String hintText, required bool isObscure}) {
+    return TextField(
+      controller: controller,
+      obscureText: isObscure,
+      textAlign: TextAlign.center, // Teks rata tengah sesuai desain
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.grey),
+        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppTheme.primaryGreen, width: 2),
         ),
       ),
     );
