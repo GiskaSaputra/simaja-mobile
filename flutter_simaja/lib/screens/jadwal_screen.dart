@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import 'absensi_screen.dart'; // Tambahkan baris ini
 
 class JadwalScreen extends StatefulWidget {
   const JadwalScreen({super.key});
@@ -147,7 +148,11 @@ class _JadwalScreenState extends State<JadwalScreen> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      // Nanti disini arahkan ke form absensi
+                      // Logika pindah halaman ke AbsensiScreen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AbsensiScreen()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.primaryGreen,

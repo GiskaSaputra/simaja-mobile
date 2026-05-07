@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import 'beranda_screen.dart';
-import 'jadwal_screen.dart'; // Tambahkan baris ini
+import 'jadwal_screen.dart'; 
+import 'materi_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     const BerandaScreen(), 
     const JadwalScreen(), 
+    const MateriScreen(),
     const Center(child: Text('Halaman Materi (Segera Hadir)')),
     const Center(child: Text('Halaman Progres (Segera Hadir)')),
     const Center(child: Text('Halaman Profil (Segera Hadir)')),
