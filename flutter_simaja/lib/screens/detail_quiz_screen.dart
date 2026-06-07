@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import 'pencarian_screen.dart';
 
 class DetailQuizScreen extends StatefulWidget {
   final String quizTitle;
@@ -62,6 +63,15 @@ class _DetailQuizScreenState extends State<DetailQuizScreen> {
                 ),
                 const SizedBox(height: 20),
                 TextField(
+                  readOnly: true,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PencarianScreen(),
+                      ),
+                    );
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search',
                     prefixIcon: const Icon(Icons.search, color: Colors.black54),

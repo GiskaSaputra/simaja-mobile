@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import 'absensi_screen.dart'; // Tambahkan baris ini
+import 'pencarian_screen.dart';
 
 class JadwalScreen extends StatefulWidget {
   const JadwalScreen({super.key});
@@ -60,6 +61,15 @@ class _JadwalScreenState extends State<JadwalScreen> {
                 const SizedBox(height: 20),
                 // Search Bar
                 TextField(
+                  readOnly: true,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PencarianScreen(),
+                      ),
+                    );
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search',
                     prefixIcon: const Icon(Icons.search, color: Colors.black54),

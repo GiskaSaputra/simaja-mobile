@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import 'detailmateri_screen.dart';
 import 'quiz_screen.dart'; // Pastikan import ini ada
+import 'pencarian_screen.dart';
 
 class MateriScreen extends StatefulWidget {
   const MateriScreen({super.key});
@@ -55,6 +56,15 @@ class _MateriScreenState extends State<MateriScreen> {
                 const SizedBox(height: 20),
                 // Search Bar
                 TextField(
+                  readOnly: true,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PencarianScreen(),
+                      ),
+                    );
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search',
                     prefixIcon: const Icon(Icons.search, color: Colors.black54),

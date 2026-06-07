@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
 import 'show_belajar_screen.dart'; // 1. Tambahkan import ini
+import 'pencarian_screen.dart';
 
 class DetailMateriScreen extends StatelessWidget {
   final String materiTitle;
@@ -52,6 +53,15 @@ class DetailMateriScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 // Search Bar
                 TextField(
+                  readOnly: true,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PencarianScreen(),
+                      ),
+                    );
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search',
                     prefixIcon: const Icon(Icons.search, color: Colors.black54),

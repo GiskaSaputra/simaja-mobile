@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import 'peringkat_screen.dart'; // Only Peringkat uses push now
 
 class BerandaScreen extends StatelessWidget {
-  const BerandaScreen({super.key});
+  final Function(int)? onChangeTab;
+
+  const BerandaScreen({super.key, this.onChangeTab});
 
   @override
   Widget build(BuildContext context) {
@@ -96,16 +99,25 @@ class BerandaScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildMenuIcon(Icons.calendar_today_outlined, 'Jadwal', () {}),
-                            _buildMenuIcon(Icons.menu_book_outlined, 'Materi', () {}),
+                            _buildMenuIcon(Icons.calendar_today_outlined, 'Jadwal', () {
+                              if (onChangeTab != null) onChangeTab!(1);
+                            }),
+                            _buildMenuIcon(Icons.menu_book_outlined, 'Materi', () {
+                              if (onChangeTab != null) onChangeTab!(2);
+                            }),
                           ],
                         ),
                         const SizedBox(height: 24),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildMenuIcon(Icons.bar_chart_outlined, 'Progres', () {}),
-                            _buildMenuIcon(Icons.emoji_events_outlined, 'Peringkat', () {}),
+                            _buildMenuIcon(Icons.bar_chart_outlined, 'Progres', () {
+                              if (onChangeTab != null) onChangeTab!(3);
+                            }),
+                            _buildMenuIcon(Icons.emoji_events_outlined, 'Peringkat', () {
+                              // Peringkat is not a bottom tab, so we push it within the Home tab's navigator
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const PeringkatScreen()));
+                            }),
                           ],
                         ),
                       ],

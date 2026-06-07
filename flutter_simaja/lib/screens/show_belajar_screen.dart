@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import 'pencarian_screen.dart';
 
 class ShowBelajarScreen extends StatelessWidget {
   final String judulPertemuan;
@@ -45,6 +46,15 @@ class ShowBelajarScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 TextField(
+                  readOnly: true,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PencarianScreen(),
+                      ),
+                    );
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search',
                     prefixIcon: const Icon(Icons.search, color: Colors.black54),
