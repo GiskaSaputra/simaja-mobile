@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
-import 'absensi_screen.dart'; // Tambahkan baris ini
+import '../services/api_service.dart';
+import 'absensi_screen.dart';
 import 'pencarian_screen.dart';
 
 class JadwalScreen extends StatefulWidget {
@@ -11,33 +12,52 @@ class JadwalScreen extends StatefulWidget {
 }
 
 class _JadwalScreenState extends State<JadwalScreen> {
-  // Dummy data jadwal untuk sementara
-  final List<Map<String, dynamic>> _jadwalList = [
-    {
-      "materi": "UI/UX Design",
-      "deskripsi": "Introduction UI/UX with Figma",
-      "tanggal": "01 May 2026",
-      "waktu": "16.00 WIB",
-      "lokasi": "Lab Komputer 1",
-      "peserta": "30 Peserta",
-    },
-    {
-      "materi": "WEB Basic",
-      "deskripsi": "Dasar HTML, CSS, dan Bootstrap",
-      "tanggal": "03 May 2026",
-      "waktu": "16.00 WIB",
-      "lokasi": "Lab Komputer 2",
-      "peserta": "25 Peserta",
-    },
-    {
-      "materi": "WEB Advance",
-      "deskripsi": "Framework CodeIgniter 4",
-      "tanggal": "05 May 2026",
-      "waktu": "16.00 WIB",
-      "lokasi": "Ruang Kelas A",
-      "peserta": "20 Peserta",
-    },
-  ];
+  List<dynamic> _jadwalList = [];
+  bool _isLoading = true; // Penanda loading saat mengambil data
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchJadwal();
+  }
+
+  // Fungsi untuk menarik data dari database CI4
+  Future<void> _fetchJadwal() async {
+    setState(() => _isLoading = true);
+    
+    var data = await ApiService.getJadwal();
+    
+    setState(() {
+      _jadwalList = data;
+      _isLoading = false;
+    });
+  }
+
+  // Fungsi untuk mengeksekusi pendaftaran jadwal
+  void _prosesDaftar(String jadwalId) async {
+    // Tampilkan notifikasi loading sementara
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Sedang memproses pendaftaran..."), duration: Duration(seconds: 1)),
+    );
+
+    var response = await ApiService.daftarJadwal(jadwalId);
+
+    if (response['success']) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message']), backgroundColor: Colors.green)
+        );
+        // Refresh daftar jadwal agar tombol berubah menjadi "✓ Terdaftar"
+        _fetchJadwal(); 
+      }
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message']), backgroundColor: Colors.red)
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +67,7 @@ class _JadwalScreenState extends State<JadwalScreen> {
         children: [
           // HEADER HIJAU MELENGKUNG DENGAN SEARCH BAR
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 60, 20, 30), // Padding atas disesuaikan untuk SafeArea
+            padding: const EdgeInsets.fromLTRB(20, 60, 20, 30), 
             decoration: const BoxDecoration(
               color: AppTheme.primaryGreen,
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
@@ -86,24 +106,36 @@ class _JadwalScreenState extends State<JadwalScreen> {
             ),
           ),
           
-          // LIST JADWAL
+          // LIST JADWAL ATAU LOADING ANIMATION
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: _jadwalList.length,
-              itemBuilder: (context, index) {
-                final data = _jadwalList[index];
-                return _buildJadwalCard(data);
-              },
-            ),
+            child: _isLoading 
+              ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen))
+              : _jadwalList.isEmpty 
+                  ? const Center(child: Text("Belum ada jadwal tersedia.", style: TextStyle(color: Colors.grey)))
+                  : RefreshIndicator(
+                      onRefresh: _fetchJadwal, // Tarik ke bawah untuk refresh manual
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: _jadwalList.length,
+                        itemBuilder: (context, index) {
+                          final data = _jadwalList[index];
+                          return _buildJadwalCard(data);
+                        },
+                      ),
+                    ),
           ),
         ],
       ),
     );
   }
 
-  // WIDGET CARD JADWAL
-  Widget _buildJadwalCard(Map<String, dynamic> data) {
+  // WIDGET CARD JADWAL DINAMIS
+  Widget _buildJadwalCard(dynamic data) {
+    bool isTerdaftar = data['is_terdaftar'] == true;
+    String idJadwal = data['id'].toString();
+    String waktu = "${data['waktu_mulai'] ?? '-'} s/d ${data['waktu_selesai'] ?? '-'} WIB";
+    String kuotaTeks = "${data['terisi'] ?? 0} / ${data['kuota'] ?? 0} Peserta";
+
     return Card(
       elevation: 2,
       margin: const EdgeInsets.only(bottom: 16),
@@ -114,12 +146,12 @@ class _JadwalScreenState extends State<JadwalScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              data['materi'],
+              data['judul'] ?? 'Tanpa Judul',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             Text(
-              data['deskripsi'],
+              data['deskripsi'] ?? '-',
               style: const TextStyle(fontSize: 12, color: Colors.black54),
             ),
             const SizedBox(height: 16),
@@ -127,45 +159,57 @@ class _JadwalScreenState extends State<JadwalScreen> {
             // Info Grid (Tanggal, Waktu, Lokasi, Peserta)
             Row(
               children: [
-                Expanded(child: _buildInfoItem(Icons.calendar_today, data['tanggal'])),
-                Expanded(child: _buildInfoItem(Icons.access_time, data['waktu'])),
+                Expanded(child: _buildInfoItem(Icons.calendar_today, data['tanggal'] ?? '-')),
+                Expanded(child: _buildInfoItem(Icons.access_time, waktu)),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                Expanded(child: _buildInfoItem(Icons.location_on_outlined, data['lokasi'])),
-                Expanded(child: _buildInfoItem(Icons.people_outline, data['peserta'])),
+                Expanded(child: _buildInfoItem(Icons.location_on_outlined, 'Lab / Ruang Kelas')), 
+                Expanded(child: _buildInfoItem(Icons.people_outline, kuotaTeks)),
               ],
             ),
             
             const SizedBox(height: 16),
             
-            // Tombol Action
+            // Tombol Action Dinamis
             Row(
               children: [
+                // TOMBOL DAFTAR
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: null, // Disabled
+                    onPressed: isTerdaftar ? null : () => _prosesDaftar(idJadwal),
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      side: const BorderSide(color: Colors.grey),
+                      side: BorderSide(color: isTerdaftar ? Colors.grey : AppTheme.primaryGreen),
                     ),
-                    child: const Text('✓ Terdaftar', style: TextStyle(color: Colors.grey)),
+                    child: Text(
+                      isTerdaftar ? '✓ Terdaftar' : 'Daftar', 
+                      style: TextStyle(color: isTerdaftar ? Colors.grey : AppTheme.primaryGreen, fontWeight: FontWeight.bold)
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
+                
+                // TOMBOL ABSEN
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Logika pindah halaman ke AbsensiScreen
+                    onPressed: isTerdaftar ? () {
+                      // Nanti di AbsensiScreen, kita bisa menangkap parameter ini
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const AbsensiScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => const AbsensiScreen(
+                            // Uncomment kode di bawah ini nanti kalau AbsensiScreen sudah siap menerima parameter:
+                            // jadwalId: idJadwal, 
+                            // judulJadwal: data['judul'],
+                          )
+                        ),
                       );
-                    },
+                    } : null, // Matikan tombol Absen jika belum terdaftar
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.primaryGreen,
+                      backgroundColor: isTerdaftar ? AppTheme.primaryGreen : Colors.grey.shade400,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),
                     child: const Text('Absen', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
@@ -185,7 +229,13 @@ class _JadwalScreenState extends State<JadwalScreen> {
       children: [
         Icon(icon, size: 16, color: Colors.black54),
         const SizedBox(width: 6),
-        Text(text, style: const TextStyle(fontSize: 12, color: Colors.black87)),
+        Flexible(
+          child: Text(
+            text, 
+            style: const TextStyle(fontSize: 12, color: Colors.black87),
+            overflow: TextOverflow.ellipsis,
+          )
+        ),
       ],
     );
   }

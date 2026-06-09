@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../services/api_service.dart'; // Import API Service
 
 class ForgotScreen extends StatefulWidget {
   const ForgotScreen({super.key});
@@ -10,17 +11,57 @@ class ForgotScreen extends StatefulWidget {
 
 class _ForgotScreenState extends State<ForgotScreen> {
   final TextEditingController _emailController = TextEditingController();
+  
+  bool _isLoading = false; // Penanda loading
+
+  // Fungsi Proses Lupa Password
+  void _prosesForgot() async {
+    String email = _emailController.text.trim();
+
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email wajib diisi!'), backgroundColor: Colors.red)
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Panggil API
+    var response = await ApiService.forgotPassword(email);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (response['success']) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message']), backgroundColor: Colors.green)
+        );
+        // Bisa langsung dikembalikan ke halaman login
+        Navigator.pop(context);
+      }
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message']), backgroundColor: Colors.red)
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Mengambil ukuran tinggi layar untuk membagi background
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.white, // Background dasar bawah (Putih)
+      backgroundColor: Colors.white, 
       body: Stack(
         children: [
-          // 1. BACKGROUND HIJAU ATAS (Melengkung di sudut bawah)
+          // 1. BACKGROUND HIJAU ATAS
           Container(
             height: height * 0.45,
             decoration: const BoxDecoration(
@@ -31,7 +72,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
             ),
           ),
 
-          // 2. KONTEN UTAMA DAN SEGITIGA BAWAH (Ikut ke-scroll)
+          // 2. KONTEN UTAMA
           SafeArea(
             child: LayoutBuilder(
               builder: (context, constraints) {
@@ -44,21 +85,15 @@ class _ForgotScreenState extends State<ForgotScreen> {
                       child: Column(
                         children: [
                           
-                          // --- BAGIAN KONTEN ATAS (Form, Teks, Tombol) ---
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri untuk Header
+                                crossAxisAlignment: CrossAxisAlignment.start, 
                                 children: [
-                                  // Header
                                   const Text(
                                     'SIMAJA',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
                                   ),
                                   const Text(
                                     'Sistem Manajemen Study Jam',
@@ -66,19 +101,14 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                   ),
                                   const SizedBox(height: 20),
                                   
-                                  // Logo "by PROTIC"
                                   Center(
                                     child: Padding(
                                       padding: const EdgeInsets.only(right: 20.0),
-                                      child: Image.asset(
-                                        'lib/assets/by_protik.png',
-                                        height: 65,
-                                      ),
+                                      child: Image.asset('lib/assets/by_protik.png', height: 65),
                                     ),
                                   ),
                                   const SizedBox(height: 30),
 
-                                  // Card Form Lupa Password
                                   Card(
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                                     elevation: 8,
@@ -87,29 +117,19 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
                                       child: Column(
                                         children: [
-                                          // Logo di dalam Card
-                                          Image.asset(
-                                            'lib/assets/logo_protik.png',
-                                            height: 95,
-                                          ),
+                                          Image.asset('lib/assets/logo_protik.png', height: 95),
                                           const SizedBox(height: 20),
 
-                                          // Teks Instruksi
                                           const Text(
                                             'No problem! Enter your email below and we will send instructions to reset your password',
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black87,
-                                            ),
+                                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black87),
                                           ),
                                           const SizedBox(height: 24),
 
-                                          // Input Email
                                           TextField(
                                             controller: _emailController,
-                                            textAlign: TextAlign.center, // Teks rata tengah sesuai desain
+                                            textAlign: TextAlign.center, 
                                             decoration: InputDecoration(
                                               hintText: 'Email',
                                               hintStyle: const TextStyle(color: Colors.grey),
@@ -130,7 +150,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                   ),
                                   const SizedBox(height: 25),
 
-                                  // Tombol Send Instructions (Di Luar Card)
+                                  // Tombol Send Instructions
                                   SizedBox(
                                     width: double.infinity,
                                     height: 50,
@@ -141,19 +161,19 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                         elevation: 4,
                                       ),
-                                      onPressed: () {
-                                        // TODO: Logika kirim email reset password
-                                      },
-                                      child: const Text('Send Instructions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                      // Hubungkan onPressed ke fungsi _prosesForgot
+                                      onPressed: _isLoading ? null : _prosesForgot, 
+                                      child: _isLoading 
+                                          ? const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3))
+                                          : const Text('Send Instructions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                     ),
                                   ),
                                   const SizedBox(height: 20),
 
-                                  // Teks Link Bawah (Back to login)
                                   Center(
                                     child: GestureDetector(
                                       onTap: () {
-                                        Navigator.pop(context); // Kembali ke halaman Login
+                                        Navigator.pop(context); 
                                       },
                                       child: const Text(
                                         'Back to login',
@@ -166,7 +186,6 @@ class _ForgotScreenState extends State<ForgotScreen> {
                             ),
                           ),
 
-                          // --- BAGIAN SEGITIGA BAWAH ---
                           SizedBox(
                             width: double.infinity,
                             child: Image.asset(

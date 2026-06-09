@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../services/api_service.dart'; // Wajib import ApiService
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -13,6 +14,51 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repeatPasswordController = TextEditingController();
+
+  bool _isLoading = false; // Penanda loading
+
+  // Fungsi Proses Register
+  void _prosesRegister() async {
+    String email = _emailController.text.trim();
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text;
+    String repeatPassword = _repeatPasswordController.text;
+
+    // Validasi Kosong
+    if (email.isEmpty || username.isEmpty || password.isEmpty || repeatPassword.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Semua kolom wajib diisi!'), backgroundColor: Colors.red));
+      return;
+    }
+
+    // Validasi Password Cocok
+    if (password != repeatPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Password dan Repeat Password tidak sama!'), backgroundColor: Colors.red));
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Panggil API Register
+    var response = await ApiService.register(username, email, password);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (response['success']) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response['message']), backgroundColor: Colors.green));
+        // Jika sukses, kembali ke halaman login
+        Navigator.pop(context);
+      }
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response['message']), backgroundColor: Colors.red));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,10 +190,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                         elevation: 4,
                                       ),
-                                      onPressed: () {
-                                        // TODO: Logika Register API
-                                      },
-                                      child: const Text('Daftar', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                      onPressed: _isLoading ? null : _prosesRegister, // Hubungkan fungsi disini
+                                      child: _isLoading 
+                                          ? const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3))
+                                          : const Text('Daftar', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                     ),
                                   ),
                                   const SizedBox(height: 20),
@@ -219,5 +265,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
-  }
+  } 
 }

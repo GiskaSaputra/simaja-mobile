@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../services/api_service.dart'; // Import API Service yang baru dibuat
 import 'register_screen.dart';
 import 'main_screen.dart';
 import 'forgot_screen.dart';
@@ -14,6 +15,52 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  
+  bool _isLoading = false; // Variabel penanda status loading
+
+  // Fungsi untuk memanggil API
+  void _prosesLogin() async {
+    setState(() {
+      _isLoading = true; // Munculkan animasi berputar
+    });
+
+    String username = _usernameController.text;
+    String password = _passwordController.text;
+
+    // Validasi input kosong
+    if (username.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Username dan Password tidak boleh kosong!'))
+      );
+      setState(() { _isLoading = false; });
+      return;
+    }
+
+    // Tembak API
+    var response = await ApiService.login(username, password);
+
+    setState(() {
+      _isLoading = false; // Matikan animasi berputar
+    });
+
+    if (response['success']) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message']), backgroundColor: Colors.green)
+        );
+        Navigator.pushReplacement(
+          context, 
+          MaterialPageRoute(builder: (context) => const MainScreen())
+        );
+      }
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message']), backgroundColor: Colors.red)
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,13 +202,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                         elevation: 4,
                                       ),
-                                      onPressed: () {
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => const MainScreen()),
-                                        );
-                                      },
-                                      child: const Text('Login', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                      // Logika tombol disable saat loading
+                                      onPressed: _isLoading ? null : _prosesLogin, 
+                                      child: _isLoading 
+                                          ? const SizedBox(
+                                              height: 24,
+                                              width: 24,
+                                              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3),
+                                            )
+                                          : const Text('Login', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                     ),
                                   ),
                                   const SizedBox(height: 20),
