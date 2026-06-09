@@ -1,0 +1,71 @@
+DEBUG - 2025-12-10 01:18:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-12-10 01:18:13 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'pustaka', 3306, '', 0)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\app\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(933): App\Controllers\Page->index()
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\app\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(933): App\Controllers\Page->index()
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#13 {main}
+CRITICAL - 2025-12-10 01:18:13 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `home_content`
+WHERE `home_content`.`id` = :home_content.id:', [...], false)
+ 3 SYSTEMPATH\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+ 5 APPPATH\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Page->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-10 01:20:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:21:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:21:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:21:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:22:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:22:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:22:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:22:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:22:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:22:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:22:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:22:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:23:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:23:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:23:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:23:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:23:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-10 01:24:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

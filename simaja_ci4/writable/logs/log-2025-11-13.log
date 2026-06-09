@@ -1,0 +1,375 @@
+DEBUG - 2025-11-13 00:58:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 00:59:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 00:59:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:01:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:02:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:02:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:02:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:03:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:08:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-11-13 01:08:33 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'pustaka', 3306, '', 0)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(140): CodeIgniter\BaseModel->first()
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(19): Myth\Auth\Authentication\LocalAuthenticator->validate(Array, true)
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Controllers\AuthController.php(99): Myth\Auth\Authentication\LocalAuthenticator->attempt(Array, false)
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->attemptLogin()
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(140): CodeIgniter\BaseModel->first()
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(19): Myth\Auth\Authentication\LocalAuthenticator->validate(Array, true)
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Controllers\AuthController.php(99): Myth\Auth\Authentication\LocalAuthenticator->attempt(Array, false)
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->attemptLogin()
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#15 {main}
+CRITICAL - 2025-11-13 01:08:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `username` = :username:
+AND `users`.`deleted_at` IS NULL
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(715): CodeIgniter\Model->doFirst()
+ 5 VENDORPATH\myth\auth\src\Authentication\LocalAuthenticator.php(140): CodeIgniter\BaseModel->first()
+ 6 VENDORPATH\myth\auth\src\Authentication\LocalAuthenticator.php(19): Myth\Auth\Authentication\LocalAuthenticator->validate([...], true)
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(99): Myth\Auth\Authentication\LocalAuthenticator->attempt([...], false)
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->attemptLogin()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+DEBUG - 2025-11-13 01:08:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-11-13 01:08:39 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'pustaka', 3306, '', 0)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(140): CodeIgniter\BaseModel->first()
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(19): Myth\Auth\Authentication\LocalAuthenticator->validate(Array, true)
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Controllers\AuthController.php(99): Myth\Auth\Authentication\LocalAuthenticator->attempt(Array, false)
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->attemptLogin()
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\BaseModel.php(715): CodeIgniter\Model->doFirst()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(140): CodeIgniter\BaseModel->first()
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(19): Myth\Auth\Authentication\LocalAuthenticator->validate(Array, true)
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Controllers\AuthController.php(99): Myth\Auth\Authentication\LocalAuthenticator->attempt(Array, false)
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->attemptLogin()
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#15 {main}
+CRITICAL - 2025-11-13 01:08:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `username` = :username:
+AND `users`.`deleted_at` IS NULL
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(715): CodeIgniter\Model->doFirst()
+ 5 VENDORPATH\myth\auth\src\Authentication\LocalAuthenticator.php(140): CodeIgniter\BaseModel->first()
+ 6 VENDORPATH\myth\auth\src\Authentication\LocalAuthenticator.php(19): Myth\Auth\Authentication\LocalAuthenticator->validate([...], true)
+ 7 VENDORPATH\myth\auth\src\Controllers\AuthController.php(99): Myth\Auth\Authentication\LocalAuthenticator->attempt([...], false)
+ 8 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->attemptLogin()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(Myth\Auth\Controllers\AuthController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+DEBUG - 2025-11-13 01:09:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:09:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:09:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:09:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:10:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:10:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:10:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:11:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:11:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:12:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:12:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:16:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:16:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:16:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:17:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:17:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:17:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:27:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:27:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:27:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:27:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:27:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:28:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:28:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:28:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:29:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:30:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:32:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-11-13 01:32:36 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "layout/home.php"
+[Method: GET, Route: /]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('layout/home.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('layout/home', [], true)
+ 3 APPPATH\Controllers\Pages.php(9): view('layout/home')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Pages->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Pages))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+DEBUG - 2025-11-13 01:33:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:33:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:35:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:35:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:36:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:36:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:36:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:36:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:36:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:36:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:37:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:37:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:37:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:37:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:37:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:40:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:43:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:43:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:54:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:54:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-11-13 01:54:37 --> mysqli_sql_exception: Table 'pustaka.materi' doesn't exist in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\app\Controllers\page.php(84): CodeIgniter\BaseModel->findAll()
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(933): App\Controllers\Page->search()
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#14 {main}
+CRITICAL - 2025-11-13 01:54:37 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pustaka.materi' doesn't exist
+[Method: GET, Route: search]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `materi`
+WHERE `judul` LIKE :judul: ESCAPE \'!\'', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\page.php(84): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Page->search()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+CRITICAL - 2025-11-13 01:54:37 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pustaka.materi' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `materi`
+WHERE `judul` LIKE \'%study jam%\' ESCAPE \'!\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `materi`
+WHERE `judul` LIKE \'%study jam%\' ESCAPE \'!\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `materi`
+WHERE `judul` LIKE :judul: ESCAPE \'!\'', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\page.php(84): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Page->search()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+CRITICAL - 2025-11-13 01:54:37 --> [Caused by] mysqli_sql_exception: Table 'pustaka.materi' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT *
+FROM `materi`
+WHERE `judul` LIKE \'%study jam%\' ESCAPE \'!\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `materi`
+WHERE `judul` LIKE \'%study jam%\' ESCAPE \'!\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `materi`
+WHERE `judul` LIKE \'%study jam%\' ESCAPE \'!\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `materi`
+WHERE `judul` LIKE :judul: ESCAPE \'!\'', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\page.php(84): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Page->search()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+DEBUG - 2025-11-13 01:54:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:55:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:55:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-11-13 01:55:04 --> mysqli_sql_exception: Unknown column 'users.deleted_at' in 'where clause' in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\BaseModel.php(611): CodeIgniter\Model->doFind(true, '2')
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\AuthenticationBase.php(130): CodeIgniter\BaseModel->find('2')
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Authentication\LocalAuthenticator.php(67): Myth\Auth\Authentication\AuthenticationBase->isLoggedIn()
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\vendor\myth\auth\src\Filters\LoginFilter.php(29): Myth\Auth\Authentication\LocalAuthenticator->check()
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Filters\Filters.php(241): Myth\Auth\Filters\LoginFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore(Array)
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('jadwal', 'before')
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#14 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#15 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#16 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA-main\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#17 {main}
+CRITICAL - 2025-11-13 01:55:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.deleted_at' in 'where clause'
+[Method: GET, Route: jadwal]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `users`.`deleted_at` IS NULL
+AND `users`.`id` = :users.id:', [...], false)
+ 2 SYSTEMPATH\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(611): CodeIgniter\Model->doFind(true, '2')
+ 4 VENDORPATH\myth\auth\src\Authentication\AuthenticationBase.php(130): CodeIgniter\BaseModel->find('2')
+ 5 VENDORPATH\myth\auth\src\Authentication\LocalAuthenticator.php(67): Myth\Auth\Authentication\AuthenticationBase->isLoggedIn()
+ 6 VENDORPATH\myth\auth\src\Filters\LoginFilter.php(29): Myth\Auth\Authentication\LocalAuthenticator->check()
+ 7 SYSTEMPATH\Filters\Filters.php(241): Myth\Auth\Filters\LoginFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 8 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+ 9 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('jadwal', 'before')
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+CRITICAL - 2025-11-13 01:55:04 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'users.deleted_at' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `users`
+WHERE `users`.`deleted_at` IS NULL
+AND `users`.`id` = \'2\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `users`
+WHERE `users`.`deleted_at` IS NULL
+AND `users`.`id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `users`.`deleted_at` IS NULL
+AND `users`.`id` = :users.id:', [...], false)
+ 4 SYSTEMPATH\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(611): CodeIgniter\Model->doFind(true, '2')
+ 6 VENDORPATH\myth\auth\src\Authentication\AuthenticationBase.php(130): CodeIgniter\BaseModel->find('2')
+ 7 VENDORPATH\myth\auth\src\Authentication\LocalAuthenticator.php(67): Myth\Auth\Authentication\AuthenticationBase->isLoggedIn()
+ 8 VENDORPATH\myth\auth\src\Filters\LoginFilter.php(29): Myth\Auth\Authentication\LocalAuthenticator->check()
+ 9 SYSTEMPATH\Filters\Filters.php(241): Myth\Auth\Filters\LoginFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+10 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+11 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('jadwal', 'before')
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+CRITICAL - 2025-11-13 01:55:04 --> [Caused by] mysqli_sql_exception: Unknown column 'users.deleted_at' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT *
+FROM `users`
+WHERE `users`.`deleted_at` IS NULL
+AND `users`.`id` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `users`
+WHERE `users`.`deleted_at` IS NULL
+AND `users`.`id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `users`
+WHERE `users`.`deleted_at` IS NULL
+AND `users`.`id` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `users`.`deleted_at` IS NULL
+AND `users`.`id` = :users.id:', [...], false)
+ 5 SYSTEMPATH\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(611): CodeIgniter\Model->doFind(true, '2')
+ 7 VENDORPATH\myth\auth\src\Authentication\AuthenticationBase.php(130): CodeIgniter\BaseModel->find('2')
+ 8 VENDORPATH\myth\auth\src\Authentication\LocalAuthenticator.php(67): Myth\Auth\Authentication\AuthenticationBase->isLoggedIn()
+ 9 VENDORPATH\myth\auth\src\Filters\LoginFilter.php(29): Myth\Auth\Authentication\LocalAuthenticator->check()
+10 SYSTEMPATH\Filters\Filters.php(241): Myth\Auth\Filters\LoginFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+11 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+12 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('jadwal', 'before')
+13 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA-main\\public\\index.php')
+DEBUG - 2025-11-13 01:55:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:55:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 01:55:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-11-13 02:08:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

@@ -1,0 +1,770 @@
+DEBUG - 2025-12-22 06:03:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-12-22 06:03:51 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'pustaka', 3306, '', 0)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\app\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(933): App\Controllers\Page->index()
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\app\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(933): App\Controllers\Page->index()
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#13 {main}
+CRITICAL - 2025-12-22 06:03:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `home_content`
+WHERE `home_content`.`id` = :home_content.id:', [...], false)
+ 3 SYSTEMPATH\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+ 5 APPPATH\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Page->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:04:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-12-22 06:04:12 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'pustaka', 3306, '', 0)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\app\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(933): App\Controllers\Page->index()
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#4 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+#5 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\app\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+#6 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(933): App\Controllers\Page->index()
+#7 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+#8 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 D:\POLITEKNIK NEGERI CILACAP\SEMESTER_3\PRAKTIKUM_WEB_2\UAS\SIMAJA - Copy\system\rewrite.php(44): require_once('D:\\POLITEKNIK N...')
+#13 {main}
+CRITICAL - 2025-12-22 06:04:12 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `home_content`
+WHERE `home_content`.`id` = :home_content.id:', [...], false)
+ 3 SYSTEMPATH\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(611): CodeIgniter\Model->doFind(true, 1)
+ 5 APPPATH\Controllers\page.php(38): CodeIgniter\BaseModel->find(1)
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Page->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Page))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:05:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:05:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:05:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:05:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:05:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:05:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:05:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:06:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:06:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:06:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:06:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:06:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:06:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:06:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:07:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:09:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:13:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:16:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:17:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:17:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:17:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:18:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:18:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 06:18:09 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:18:09 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:18:09 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:18:09 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:18:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:21:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:21:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:24:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:24:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:24:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:24:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:24:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:24:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:25:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:25:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:25:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:26:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:26:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:30:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:30:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:35:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 06:35:12 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:35:12 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:35:12 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:35:12 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:35:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:35:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:35:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:35:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:35:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:35:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:35:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:35:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-12-22 06:35:52 --> ErrorException: Array to string conversion
+[Method: GET, Route: admin/home/edit]
+in APPPATH\Views\admin\home\edit.php on line 25.
+ 1 APPPATH\Views\admin\home\edit.php(25): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\home\\edit.php', 25)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\home\\edit.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/home/edit', [], true)
+ 5 APPPATH\Controllers\admin.php(748): view('admin/home/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->homeEdit()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:36:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:36:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:36:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:38:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:43:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:43:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-12-22 06:43:29 --> ErrorException: Array to string conversion
+[Method: GET, Route: admin/home/edit]
+in APPPATH\Views\layout\admin_layout.php on line 220.
+ 1 APPPATH\Views\layout\admin_layout.php(220): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\layout\\admin_layout.php', 220)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\layout\\admin_layout.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\View\View.php(242): CodeIgniter\View\View->render('layout/admin_layout', [], true)
+ 5 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/home/edit', [], true)
+ 6 APPPATH\Controllers\admin.php(745): view('admin/home/edit', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->homeEdit()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:46:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:46:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:46:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:46:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:48:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:48:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:48:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:48:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:49:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 06:50:18 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:50:18 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:50:18 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:50:18 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:50:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:50:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 06:50:59 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:50:59 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:50:59 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:50:59 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:51:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-12-22 06:51:09 --> Error: Cannot use object of type Myth\Auth\Entities\User as array
+[Method: GET, Route: admin/users/edit/9]
+in APPPATH\Views\admin\users\edit.php on line 14.
+ 1 SYSTEMPATH\View\View.php(226): include()
+ 2 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 3 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/edit', [], true)
+ 4 APPPATH\Controllers\admin.php(655): view('admin/users/edit', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->userEdit('9')
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:51:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 06:51:13 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:51:13 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:51:13 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:51:13 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:52:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 06:52:50 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:52:50 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:52:50 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:52:50 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:52:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:53:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:53:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:53:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:53:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:54:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:54:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:54:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:54:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:54:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:55:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:55:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:55:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:55:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:55:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:55:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:57:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:57:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:57:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:58:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:59:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:59:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:59:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 06:59:49 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:59:49 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:59:49 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 06:59:49 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 06:59:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 06:59:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:00:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:00:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:01:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:02:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:02:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:02:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:02:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:03:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:03:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:03:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:03:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:03:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:03:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:03:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:04:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:04:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:04:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:04:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:05:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:05:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:05:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:06:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:06:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:06:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:06:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:07:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:07:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:07:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:07:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:07:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:07:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:07:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 07:07:36 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 07:07:36 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 07:07:36 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 07:07:36 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 07:07:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:07:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-12-22 07:07:53 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 07:07:53 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 07:07:53 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+WARNING - 2025-12-22 07:07:53 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Views\admin\users\index.php on line 77.
+ 1 APPPATH\Views\admin\users\index.php(77): strtotime(null)
+ 2 SYSTEMPATH\View\View.php(226): include('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\app\\Views\\admin\\users\\index.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():223}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('admin/users/index', [], true)
+ 5 APPPATH\Controllers\admin.php(588): view('admin/users/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin->users()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\POLITEKNIK NEGERI CILACAP\\SEMESTER_3\\PRAKTIKUM_WEB_2\\UAS\\SIMAJA - Copy\\public\\index.php')
+DEBUG - 2025-12-22 07:07:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:08:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:08:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:08:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:08:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-12-22 07:08:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
