@@ -1,31 +1,61 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../services/api_service.dart';
 import 'peringkat_screen.dart';
 import 'pencarian_screen.dart';
 
-class ProgresScreen extends StatelessWidget {
+class ProgresScreen extends StatefulWidget {
   const ProgresScreen({super.key});
+
+  @override
+  State<ProgresScreen> createState() => _ProgresScreenState();
+}
+
+class _ProgresScreenState extends State<ProgresScreen> {
+  Map<String, dynamic>? _progresData;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchProgres();
+  }
+
+  Future<void> _fetchProgres() async {
+    setState(() => _isLoading = true);
+    var data = await ApiService.getProgres();
+    setState(() {
+      _progresData = data;
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.bgGrey,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildHeader(context),
-            const SizedBox(height: 16),
-            _buildStatCards(),
-            const SizedBox(height: 16),
-            _buildPeringkatButton(context),
-            const SizedBox(height: 24),
-            _buildAktivitasMingguan(),
-            const SizedBox(height: 16),
-            _buildProgresMateri(),
-            const SizedBox(height: 24), // Bottom padding for navbar
-          ],
-        ),
-      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen))
+          : RefreshIndicator(
+              onRefresh: _fetchProgres,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    _buildHeader(context),
+                    const SizedBox(height: 16),
+                    _buildStatCards(),
+                    const SizedBox(height: 16),
+                    _buildPeringkatButton(context),
+                    const SizedBox(height: 24),
+                    _buildAktivitasMingguan(),
+                    const SizedBox(height: 16),
+                    _buildProgresMateri(),
+                    const SizedBox(height: 24), 
+                  ],
+                ),
+              ),
+            ),
     );
   }
 
@@ -79,9 +109,7 @@ class ProgresScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const PencarianScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const PencarianScreen()),
                 );
               },
               decoration: const InputDecoration(
@@ -98,6 +126,9 @@ class ProgresScreen extends StatelessWidget {
   }
 
   Widget _buildStatCards() {
+    int totalJam = _progresData?['total_jam'] ?? 0;
+    int streak = _progresData?['streak'] ?? 0;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
@@ -105,7 +136,7 @@ class ProgresScreen extends StatelessWidget {
           Expanded(
             child: _buildStatCard(
               title: 'Total Jam Belajar',
-              value: '124 Jam',
+              value: '$totalJam Jam',
               icon: Icons.access_time,
               iconColor: Colors.amber,
               subtitle: 'Terus meningkat',
@@ -117,7 +148,7 @@ class ProgresScreen extends StatelessWidget {
           Expanded(
             child: _buildStatCard(
               title: 'Streak',
-              value: '12 Hari',
+              value: '$streak Hari',
               icon: Icons.local_fire_department,
               iconColor: Colors.redAccent,
               subtitle: 'Pertahankan Konsistenmu',
@@ -153,20 +184,13 @@ class ProgresScreen extends StatelessWidget {
             children: [
               Icon(icon, color: iconColor, size: 16),
               const SizedBox(width: 4),
-              Text(
-                title,
-                style: const TextStyle(color: Colors.grey, fontSize: 12),
-              ),
+              Text(title, style: const TextStyle(color: Colors.grey, fontSize: 12)),
             ],
           ),
           const SizedBox(height: 8),
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: AppTheme.textDark,
-            ),
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.textDark),
           ),
           const SizedBox(height: 8),
           Row(
@@ -202,21 +226,18 @@ class ProgresScreen extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppTheme.secondaryGreen,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: const Text(
         'PERINGKAT',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
     );
   }
 
   Widget _buildAktivitasMingguan() {
+    List<dynamic> aktivitasMingguan = _progresData?['jam_mingguan'] ?? [];
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
@@ -230,27 +251,27 @@ class ProgresScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              children: [
+              children: const [
                 Icon(Icons.bar_chart, color: AppTheme.textDark, size: 24),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   'Aktivitas Mingguan',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.textDark,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textDark),
                 ),
               ],
             ),
             const SizedBox(height: 20),
-            _buildProgressBarRow('Minggu 1', 0.2),
-            const SizedBox(height: 12),
-            _buildProgressBarRow('Minggu 2', 0.2),
-            const SizedBox(height: 12),
-            _buildProgressBarRow('Minggu 3', 0.2),
-            const SizedBox(height: 12),
-            _buildProgressBarRow('Minggu 4', 0.2),
+            if (aktivitasMingguan.isEmpty)
+              const Text("Belum ada aktivitas.", style: TextStyle(color: Colors.grey))
+            else
+              ...aktivitasMingguan.map((item) {
+                // Konversi persen (contoh 20) menjadi decimal 0.2 untuk LinearProgressIndicator
+                double progressDecimal = (item['persen'] ?? 0) / 100.0;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: _buildProgressBarRow(item['minggu'], progressDecimal),
+                );
+              }).toList(),
           ],
         ),
       ),
@@ -258,6 +279,8 @@ class ProgresScreen extends StatelessWidget {
   }
 
   Widget _buildProgresMateri() {
+    List<dynamic> progresMateri = _progresData?['target_bulanan'] ?? [];
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
@@ -271,23 +294,26 @@ class ProgresScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              children: [
+              children: const [
                 Icon(Icons.bar_chart, color: AppTheme.textDark, size: 24),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   'Progres Materi',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.textDark,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textDark),
                 ),
               ],
             ),
             const SizedBox(height: 20),
-            _buildProgressBarRow('UI/UX', 0.2),
-            const SizedBox(height: 12),
-            _buildProgressBarRow('Web Basic', 0.2),
+            if (progresMateri.isEmpty)
+              const Text("Belum ada materi dipelajari.", style: TextStyle(color: Colors.grey))
+            else
+              ...progresMateri.map((item) {
+                double progressDecimal = (item['persen'] ?? 0) / 100.0;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: _buildProgressBarRow(item['judul'], progressDecimal),
+                );
+              }).toList(),
           ],
         ),
       ),
@@ -301,12 +327,9 @@ class ProgresScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
             Text(
-              label,
-              style: const TextStyle(fontWeight: FontWeight.w500),
-            ),
-            Text(
-              '${(progress * 100).toInt()}% Aktivitas',
+              '${(progress * 100).toInt()}%',
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
           ],

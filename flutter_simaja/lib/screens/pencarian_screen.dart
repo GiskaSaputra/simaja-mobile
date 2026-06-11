@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../services/api_service.dart';
+import 'detailmateri_screen.dart';
+import 'jadwal_screen.dart';
 
 class PencarianScreen extends StatefulWidget {
   final String? initialQuery;
@@ -12,31 +15,40 @@ class PencarianScreen extends StatefulWidget {
 class _PencarianScreenState extends State<PencarianScreen> {
   late TextEditingController _searchController;
   String _currentQuery = '';
+  bool _isLoading = true;
 
-  // Dummy data
-  final List<Map<String, String>> _allMateri = [
-    {'title': 'WEB Basic', 'subtitle': 'Dasar HTML & CSS'},
-    {'title': 'WEB Advance', 'subtitle': 'Framework PHP & JS'},
-    {'title': 'Mobile Basic', 'subtitle': 'Pengenalan Flutter'},
-    {'title': 'Mobile Advance', 'subtitle': 'State Management'},
-  ];
+  // Tempat menyimpan data asli dari database
+  List<dynamic> _allMateri = [];
+  List<dynamic> _allJadwal = [];
 
-  final List<Map<String, String>> _allJadwal = [
-    {'title': 'WEB Basic', 'subtitle': 'Introduction HTML'},
-    {'title': 'WEB Advance', 'subtitle': 'Introduction PHP'},
-    {'title': 'Mobile Basic', 'subtitle': 'Introduction Dart'},
-    {'title': 'Mobile Advance', 'subtitle': 'API Integration'},
-  ];
-
-  List<Map<String, String>> _filteredMateri = [];
-  List<Map<String, String>> _filteredJadwal = [];
+  // Tempat menyimpan data yang sudah di-filter (disaring)
+  List<dynamic> _filteredMateri = [];
+  List<dynamic> _filteredJadwal = [];
 
   @override
   void initState() {
     super.initState();
     _currentQuery = widget.initialQuery ?? '';
     _searchController = TextEditingController(text: _currentQuery);
-    _filterResults(_currentQuery);
+    _fetchDataFromApi();
+  }
+
+  // Tarik semua data dari API saat halaman pertama kali dibuka
+  Future<void> _fetchDataFromApi() async {
+    setState(() => _isLoading = true);
+    
+    var dataMateri = await ApiService.getMateri();
+    var dataJadwal = await ApiService.getJadwal();
+
+    setState(() {
+      _allMateri = dataMateri;
+      _allJadwal = dataJadwal;
+      _isLoading = false;
+      // Jika ada teks bawaan dari halaman sebelumnya, langsung filter
+      if (_currentQuery.isNotEmpty) {
+        _filterResults(_currentQuery);
+      }
+    });
   }
 
   @override
@@ -45,6 +57,7 @@ class _PencarianScreenState extends State<PencarianScreen> {
     super.dispose();
   }
 
+  // Fungsi menyaring teks secara dinamis
   void _filterResults(String query) {
     setState(() {
       _currentQuery = query;
@@ -53,14 +66,19 @@ class _PencarianScreenState extends State<PencarianScreen> {
         _filteredJadwal = [];
       } else {
         final lowerQuery = query.toLowerCase();
+        
+        // Filter untuk Materi
         _filteredMateri = _allMateri.where((m) {
-          return m['title']!.toLowerCase().contains(lowerQuery) ||
-              m['subtitle']!.toLowerCase().contains(lowerQuery);
+          final judul = (m['judul'] ?? '').toLowerCase();
+          final deskripsi = (m['deskripsi'] ?? '').toLowerCase();
+          return judul.contains(lowerQuery) || deskripsi.contains(lowerQuery);
         }).toList();
 
+        // Filter untuk Jadwal
         _filteredJadwal = _allJadwal.where((j) {
-          return j['title']!.toLowerCase().contains(lowerQuery) ||
-              j['subtitle']!.toLowerCase().contains(lowerQuery);
+          final judul = (j['judul'] ?? '').toLowerCase();
+          final deskripsi = (j['deskripsi'] ?? '').toLowerCase();
+          return judul.contains(lowerQuery) || deskripsi.contains(lowerQuery);
         }).toList();
       }
     });
@@ -70,15 +88,24 @@ class _PencarianScreenState extends State<PencarianScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildHeader(context),
-            const SizedBox(height: 24),
-            _buildSearchResults(),
-            const SizedBox(height: 24), // Bottom padding
-          ],
-        ),
+      body: Column(
+        children: [
+          _buildHeader(context),
+          // Jika sedang narik data dari server, tampilkan loading. Jika selesai, tampilkan hasil
+          Expanded(
+            child: _isLoading 
+              ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen))
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 24),
+                      _buildSearchResults(),
+                      const SizedBox(height: 24), 
+                    ],
+                  ),
+                ),
+          ),
+        ],
       ),
     );
   }
@@ -125,7 +152,7 @@ class _PencarianScreenState extends State<PencarianScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 48), // Balance for the back button
+                const SizedBox(width: 48), 
               ],
             ),
           ),
@@ -182,9 +209,9 @@ class _PencarianScreenState extends State<PencarianScreen> {
         child: Padding(
           padding: EdgeInsets.all(24.0),
           child: Text(
-            'Ketik kata kunci untuk mulai mencari (misal: "web" atau "mobile")',
+            'Ketik kata kunci untuk mulai mencari\n(misal: "UI/UX" atau "Web")',
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppTheme.textGrey),
+            style: TextStyle(color: AppTheme.textGrey, height: 1.5),
           ),
         ),
       );
@@ -216,7 +243,7 @@ class _PencarianScreenState extends State<PencarianScreen> {
                   fontWeight: FontWeight.bold,
                 ),
                 children: [
-                  const TextSpan(text: 'Hasil Pencari untuk: '),
+                  const TextSpan(text: 'Hasil Pencarian untuk: '),
                   TextSpan(
                     text: '"$_currentQuery"',
                     style: const TextStyle(color: AppTheme.secondaryGreen),
@@ -234,8 +261,8 @@ class _PencarianScreenState extends State<PencarianScreen> {
           ),
           const SizedBox(height: 24),
 
+          // --- MATERI SECTION ---
           if (_filteredMateri.isNotEmpty) ...[
-            // Materi Section
             Row(
               children: const [
                 Icon(Icons.menu_book, color: AppTheme.secondaryGreen),
@@ -254,6 +281,7 @@ class _PencarianScreenState extends State<PencarianScreen> {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
                 children: _filteredMateri.asMap().entries.map((entry) {
@@ -262,10 +290,21 @@ class _PencarianScreenState extends State<PencarianScreen> {
                   return Column(
                     children: [
                       _buildResultItem(
-                        title: item['title']!,
-                        subtitle: item['subtitle']!,
+                        title: item['judul'] ?? 'Tanpa Judul',
+                        subtitle: item['deskripsi'] ?? '-',
                         buttonText: 'Lihat Detail',
-                        onPressed: () {},
+                        onPressed: () {
+                          // Pindah ke Detail Materi saat diklik
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailMateriScreen(
+                                materiId: item['id'].toString(),
+                                materiTitle: item['judul'] ?? 'Materi',
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       if (index < _filteredMateri.length - 1)
                         const Divider(height: 1, color: Colors.grey),
@@ -277,8 +316,8 @@ class _PencarianScreenState extends State<PencarianScreen> {
             const SizedBox(height: 32),
           ],
 
+          // --- JADWAL SECTION ---
           if (_filteredJadwal.isNotEmpty) ...[
-            // Jadwal Section
             Row(
               children: const [
                 Icon(Icons.calendar_month, color: AppTheme.secondaryGreen),
@@ -297,19 +336,30 @@ class _PencarianScreenState extends State<PencarianScreen> {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
                 children: _filteredJadwal.asMap().entries.map((entry) {
                   final index = entry.key;
                   final item = entry.value;
+                  
+                  // Gabungkan tanggal dan waktu untuk subtitle
+                  String infoJadwal = "${item['tanggal'] ?? '-'} • ${item['waktu_mulai'] ?? '-'} WIB";
+
                   return Column(
                     children: [
                       _buildResultItem(
-                        title: item['title']!,
-                        subtitle: item['subtitle']!,
+                        title: item['judul'] ?? 'Tanpa Judul',
+                        subtitle: infoJadwal,
                         buttonText: 'Lihat Jadwal',
                         isSolidButton: true,
-                        onPressed: () {},
+                        onPressed: () {
+                          // Lempar ke halaman jadwal agar user bisa daftar/absen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const JadwalScreen()),
+                          );
+                        },
                       ),
                       if (index < _filteredJadwal.length - 1)
                         const Divider(height: 1, color: Colors.grey),
@@ -342,19 +392,14 @@ class _PencarianScreenState extends State<PencarianScreen> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: const TextStyle(
-                    color: AppTheme.textGrey,
-                    fontSize: 12,
-                  ),
+                  style: const TextStyle(color: AppTheme.textGrey, fontSize: 12),
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -369,12 +414,8 @@ class _PencarianScreenState extends State<PencarianScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    minimumSize:
-                        Size.zero, // Overrides default size constraints
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    minimumSize: Size.zero,
                   ),
                   child: Text(
                     buttonText,
@@ -388,10 +429,7 @@ class _PencarianScreenState extends State<PencarianScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     minimumSize: Size.zero,
                   ),
                   child: Row(
@@ -399,10 +437,7 @@ class _PencarianScreenState extends State<PencarianScreen> {
                     children: [
                       Text(
                         buttonText,
-                        style: const TextStyle(
-                          color: AppTheme.secondaryGreen,
-                          fontSize: 12,
-                        ),
+                        style: const TextStyle(color: AppTheme.secondaryGreen, fontSize: 12),
                       ),
                       const SizedBox(width: 4),
                       const Icon(

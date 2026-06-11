@@ -1,33 +1,121 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../services/api_service.dart';
 import 'pencarian_screen.dart';
 
 class DetailQuizScreen extends StatefulWidget {
+  final String pertemuanId;
   final String quizTitle;
 
-  const DetailQuizScreen({super.key, required this.quizTitle});
+  const DetailQuizScreen({
+    super.key, 
+    required this.pertemuanId, 
+    required this.quizTitle
+  });
 
   @override
   State<DetailQuizScreen> createState() => _DetailQuizScreenState();
 }
 
 class _DetailQuizScreenState extends State<DetailQuizScreen> {
-  // Menyimpan jawaban yang dipilih user (Format: Kunci ID Soal -> Jawaban)
-  Map<int, String> answers = {};
+  // Menyimpan jawaban user (Format: Kunci ID Soal (String) -> Jawaban ID (String))
+  Map<String, String> answers = {};
+  
+  List<dynamic> _soalList = [];
+  bool _isLoading = true;
+  bool _isSubmitting = false;
 
-  // Dummy Soal
-  final List<Map<String, dynamic>> questions = [
-    {
-      "id": 1,
-      "soal": "Properti CSS untuk mengubah warna teks adalah?",
-      "opsi": ["background-color", "text-color", "color", "font-color"]
-    },
-    {
-      "id": 2,
-      "soal": "Apa kepanjangan dari HTML?",
-      "opsi": ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language", "Hyper Text Multi Language"]
+  @override
+  void initState() {
+    super.initState();
+    _fetchSoal();
+  }
+
+  Future<void> _fetchSoal() async {
+    setState(() => _isLoading = true);
+    var data = await ApiService.getSoalQuiz(widget.pertemuanId);
+    setState(() {
+      _soalList = data;
+      _isLoading = false;
+    });
+  }
+
+  void _submitJawaban() async {
+    // Validasi: Pastikan semua soal sudah dijawab
+    if (answers.length < _soalList.length) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Harap jawab semua soal terlebih dahulu!'), backgroundColor: Colors.red),
+      );
+      return;
     }
-  ];
+
+    setState(() => _isSubmitting = true);
+
+    var response = await ApiService.submitQuiz(widget.pertemuanId, answers);
+
+    setState(() => _isSubmitting = false);
+
+    if (response['success']) {
+      if (context.mounted) {
+        // Tampilkan popup sukses dengan nilai
+        _showScoreDialog(response['skor_akhir'].toString(), response['message']);
+      }
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message']), backgroundColor: Colors.red),
+        );
+      }
+    }
+  }
+
+  void _showScoreDialog(String skor, String pesan) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.emoji_events, color: Colors.amber, size: 80),
+                const SizedBox(height: 20),
+                Text(
+                  'Skor Akhir: $skor',
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  pesan,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 14, color: Colors.black87),
+                ),
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppTheme.primaryGreen,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(dialogContext); // Tutup dialog
+                      Navigator.pop(context); // Kembali ke list kuis
+                    },
+                    child: const Text('Oke', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +155,7 @@ class _DetailQuizScreenState extends State<DetailQuizScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const PencarianScreen(),
-                      ),
+                      MaterialPageRoute(builder: (context) => const PencarianScreen()),
                     );
                   },
                   decoration: InputDecoration(
@@ -90,85 +176,90 @@ class _DetailQuizScreenState extends State<DetailQuizScreen> {
 
           // --- KONTEN SOAL ---
           Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Judul & Sub-judul
-                  Text(
-                    widget.quizTitle,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    'Pastikan semua soal terjawab sebelum mengirim.',
-                    style: TextStyle(fontSize: 12, color: Colors.black54),
-                  ),
-                  const SizedBox(height: 24),
+            child: _isLoading
+              ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen))
+              : _soalList.isEmpty
+                  ? const Center(child: Text('Tidak ada soal.', style: TextStyle(color: Colors.grey)))
+                  : SingleChildScrollView(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.quizTitle,
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Pastikan semua soal terjawab sebelum mengirim.',
+                            style: TextStyle(fontSize: 12, color: Colors.black54),
+                          ),
+                          const SizedBox(height: 24),
 
-                  // Mapping List Soal
-                  ...questions.map((q) => _buildQuestion(q)).toList(),
-                  
-                  const SizedBox(height: 20),
-                  
-                  // Tombol Kirim Quiz
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppTheme.primaryGreen,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          // Mapping List Soal
+                          ..._soalList.asMap().entries.map((entry) {
+                            int idx = entry.key + 1;
+                            var soal = entry.value;
+                            return _buildQuestion(idx, soal);
+                          }).toList(),
+                          
+                          const SizedBox(height: 20),
+                          
+                          // Tombol Kirim Quiz
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppTheme.primaryGreen,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                              ),
+                              onPressed: _isSubmitting ? null : _submitJawaban,
+                              child: _isSubmitting 
+                                  ? const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3))
+                                  : const Text('Kirim Jawaban', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                            ),
+                          ),
+                          const SizedBox(height: 40),
+                        ],
                       ),
-                      onPressed: () {
-                        // TODO: Logika submit jawaban
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Kirim Jawaban', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                ],
-              ),
-            ),
           ),
         ],
       ),
     );
   }
 
-  // WIDGET KHUSUS UNTUK SOAL (Sesuai Figma)
-  Widget _buildQuestion(Map<String, dynamic> q) {
-    int qId = q['id'];
-    List<String> options = q['opsi'];
+  // WIDGET KHUSUS UNTUK SOAL (Dinamis dari API)
+  Widget _buildQuestion(int index, Map<String, dynamic> q) {
+    String soalId = q['id'].toString();
+    List<dynamic> options = q['opsi'] ?? [];
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Teks Soal dengan Badge "No. X"
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.only(top: 2), // Penyelarasan agar rata dengan teks
+                margin: const EdgeInsets.only(top: 2),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppTheme.primaryGreen,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  'No. $qId',
+                  'No. $index',
                   style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  q['soal'],
+                  q['soal'] ?? '',
                   style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black87),
                 ),
               ),
@@ -176,42 +267,42 @@ class _DetailQuizScreenState extends State<DetailQuizScreen> {
           ),
           const SizedBox(height: 16),
 
-          // Pilihan Ganda (Berbentuk Card Outline)
+          // Pilihan Ganda 
           ...options.map((option) {
-            bool isSelected = answers[qId] == option;
+            String opsiId = option['id'].toString();
+            String teksJawaban = option['jawaban'] ?? '';
+            bool isSelected = answers[soalId] == opsiId;
             
             return GestureDetector(
               onTap: () {
                 setState(() {
-                  answers[qId] = option; // Simpan jawaban
+                  answers[soalId] = opsiId; // Simpan ID jawaban
                 });
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: isSelected ? Colors.blue.withOpacity(0.05) : Colors.white,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: AppTheme.primaryGreen, // Border hijau seperti Figma
-                    width: 1.5,
+                    color: isSelected ? AppTheme.primaryGreen : Colors.grey.shade300,
+                    width: isSelected ? 1.5 : 1.0,
                   ),
                 ),
                 child: Row(
                   children: [
-                    // Icon Radio Kustom
                     Icon(
                       isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-                      color: AppTheme.primaryGreen,
+                      color: isSelected ? AppTheme.primaryGreen : Colors.grey,
                     ),
                     const SizedBox(width: 12),
-                    // Teks Opsi
                     Expanded(
                       child: Text(
-                        option,
-                        style: const TextStyle(
-                          color: AppTheme.primaryGreen,
-                          fontWeight: FontWeight.bold,
+                        teksJawaban,
+                        style: TextStyle(
+                          color: isSelected ? AppTheme.primaryGreen : Colors.black87,
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                           fontSize: 15,
                         ),
                       ),

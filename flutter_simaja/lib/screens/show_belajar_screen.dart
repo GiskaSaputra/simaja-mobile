@@ -1,16 +1,52 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
+import '../services/api_service.dart'; // Wajib import ApiService
 import 'pencarian_screen.dart';
 
-class ShowBelajarScreen extends StatelessWidget {
+class ShowBelajarScreen extends StatefulWidget {
+  final String pertemuanId;
   final String judulPertemuan;
   final String materiTitle;
+  final String isiMateri;
 
   const ShowBelajarScreen({
     super.key, 
+    required this.pertemuanId,
     required this.judulPertemuan, 
-    required this.materiTitle
+    required this.materiTitle,
+    required this.isiMateri,
   });
+
+  @override
+  State<ShowBelajarScreen> createState() => _ShowBelajarScreenState();
+}
+
+class _ShowBelajarScreenState extends State<ShowBelajarScreen> {
+  bool _isLoading = false;
+
+  // Fungsi untuk menandai materi sudah dibaca (dikirim ke API)
+  void _tandaiSelesai() async {
+    setState(() => _isLoading = true);
+
+    var response = await ApiService.markComplete(widget.pertemuanId);
+    
+    setState(() => _isLoading = false);
+
+    if (response['success']) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Berhasil! Progres belajarmu telah bertambah."), backgroundColor: Colors.green),
+        );
+        Navigator.pop(context); // Kembali ke halaman list pertemuan
+      }
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message']), backgroundColor: Colors.red),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +54,7 @@ class ShowBelajarScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // --- HEADER HIJAU (Konsisten dengan Figma) ---
+          // --- HEADER HIJAU ---
           Container(
             padding: const EdgeInsets.fromLTRB(24, 60, 24, 30),
             decoration: const BoxDecoration(
@@ -50,9 +86,7 @@ class ShowBelajarScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const PencarianScreen(),
-                      ),
+                      MaterialPageRoute(builder: (context) => const PencarianScreen()),
                     );
                   },
                   decoration: InputDecoration(
@@ -78,9 +112,9 @@ class ShowBelajarScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Judul Pertemuan (Teks Hijau di Figma)
+                  // Judul Pertemuan 
                   Text(
-                    '$judulPertemuan: $materiTitle',
+                    '${widget.judulPertemuan}: ${widget.materiTitle}',
                     style: const TextStyle(
                       color: AppTheme.primaryGreen,
                       fontSize: 18,
@@ -108,7 +142,7 @@ class ShowBelajarScreen extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Image.asset(
-                            'lib/assets/banner.png',
+                            'lib/assets/banner.png', // Pastikan gambar banner.png kamu ada
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,
@@ -143,17 +177,19 @@ class ShowBelajarScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Pelajari materi melalui video di atas.',
-                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                  
+                  // Menampilkan Link / URL dari Database
+                  Text(
+                    'Materi Pembelajaran:\n${widget.isiMateri}',
+                    style: const TextStyle(fontSize: 13, color: Colors.blueAccent),
                   ),
                   const SizedBox(height: 24),
 
-                  // TIPS BELAJAR (Kotak Hijau Muda di Figma)
+                  // TIPS BELAJAR
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE8F5E9), // Hijau sangat muda
+                      color: const Color(0xFFE8F5E9),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: AppTheme.primaryGreen, width: 1.5),
                     ),
@@ -162,7 +198,7 @@ class ShowBelajarScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Image.asset('lib/assets/logo_protik.png', height: 24), // Menggantikan icon lampu dengan logo protik kecil
+                            Image.asset('lib/assets/logo_protik.png', height: 24), 
                             const SizedBox(width: 10),
                             const Text(
                               'Tips Belajar:',
@@ -177,13 +213,27 @@ class ShowBelajarScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         const Text(
                           'Catat poin penting, jika kurang jelas. Ulangi materi di atas.',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.black87,
-                            height: 1.5,
-                          ),
+                          style: TextStyle(fontSize: 13, color: Colors.black87, height: 1.5),
                         ),
                       ],
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+
+                  // TOMBOL TANDAI SELESAI
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.primaryGreen,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      ),
+                      onPressed: _isLoading ? null : _tandaiSelesai,
+                      child: _isLoading 
+                          ? const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3))
+                          : const Text('Tandai Selesai Belajar', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],

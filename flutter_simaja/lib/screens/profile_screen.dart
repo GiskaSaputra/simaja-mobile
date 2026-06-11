@@ -1,33 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/theme.dart';
+import '../services/api_service.dart';
 import 'edit_profile_screen.dart';
-import 'login_screen.dart'; // Assuming this exists for logout
+import 'login_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  Map<String, dynamic>? _profileData;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchProfile();
+  }
+
+  Future<void> _fetchProfile() async {
+    setState(() => _isLoading = true);
+    var data = await ApiService.getProfile();
+    setState(() {
+      _profileData = data;
+      _isLoading = false;
+    });
+  }
+
+  void _logout() async {
+    // Hapus sesi lokal
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+
+    if (context.mounted) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        (route) => false,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.bgGrey,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildHeader(context),
-            const SizedBox(height: 16),
-            _buildInfoProfil(context),
-            const SizedBox(height: 24),
-            _buildStatsGrid(),
-            const SizedBox(height: 24),
-            _buildLogoutButton(context),
-            const SizedBox(height: 32), // Bottom padding
-          ],
-        ),
-      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen))
+          : RefreshIndicator(
+              onRefresh: _fetchProfile,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    _buildHeader(context),
+                    const SizedBox(height: 16),
+                    _buildInfoProfil(context),
+                    const SizedBox(height: 24),
+                    _buildStatsGrid(),
+                    const SizedBox(height: 24),
+                    _buildLogoutButton(context),
+                    const SizedBox(height: 32), 
+                  ],
+                ),
+              ),
+            ),
     );
   }
 
   Widget _buildHeader(BuildContext context) {
+    // Mengambil nama dan nim, berikan nilai default jika null
+    var biodata = _profileData?['biodata'] ?? {};
+    String namaLengkap = biodata['nama_lengkap'] ?? 'User Baru';
+    String nim = biodata['nim'] ?? 'Belum ada NIM';
+
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -81,19 +131,23 @@ class ProfileScreen extends StatelessWidget {
                   child: Icon(Icons.person, color: Colors.white, size: 32),
                 ),
                 const SizedBox(width: 16),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'NAZRIL ANDHIKA',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                    ),
-                    Text(
-                      'NIM. 240302002',
-                      style: TextStyle(color: AppTheme.textGrey, fontSize: 12),
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        namaLengkap.toUpperCase(),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        'NIM. $nim',
+                        style: const TextStyle(color: AppTheme.textGrey, fontSize: 12),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -104,6 +158,8 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildInfoProfil(BuildContext context) {
+    var biodata = _profileData?['biodata'] ?? {};
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
@@ -120,35 +176,34 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 const Text(
                   'Informasi Profil',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.textDark,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textDark),
                 ),
                 IconButton(
                   icon: const Icon(Icons.edit_square, color: AppTheme.textDark),
                   onPressed: () {
+                    // Pindah ke halaman edit sambil membawa data saat ini
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const EditProfileScreen()),
-                    );
+                      MaterialPageRoute(
+                        builder: (context) => EditProfileScreen(currentData: biodata),
+                      ),
+                    ).then((_) => _fetchProfile()); // Refresh saat kembali
                   },
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            _buildInfoRow('Kelas', 'TI-2A'),
+            _buildInfoRow('Kelas', biodata['kelas'] ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Prodi', 'Teknik Informatika'),
+            _buildInfoRow('Prodi', biodata['prodi'] ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Jurusan', 'Komputer & Bisnis'),
+            _buildInfoRow('Jurusan', biodata['jurusan'] ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Semester', '3 (Tiga)'),
+            _buildInfoRow('Semester', biodata['semester'] ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Jenis Kelamin', 'Perempuan'),
+            _buildInfoRow('Jenis Kelamin', biodata['jenis_kelamin'] ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Alamat', 'Cilacap'),
+            _buildInfoRow('Alamat', biodata['alamat'] ?? '-'),
           ],
         ),
       ),
@@ -165,13 +220,22 @@ class ProfileScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+          Expanded(
+            flex: 2,
+            child: Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
           ),
-          Text(
-            value,
-            style: const TextStyle(color: AppTheme.textGrey, fontSize: 12, fontWeight: FontWeight.bold),
+          Expanded(
+            flex: 3,
+            child: Text(
+              value,
+              textAlign: TextAlign.right,
+              style: const TextStyle(color: AppTheme.textGrey, fontSize: 12, fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),
@@ -179,6 +243,8 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildStatsGrid() {
+    var stats = _profileData?['stats'] ?? {};
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: GridView.count(
@@ -189,10 +255,10 @@ class ProfileScreen extends StatelessWidget {
         crossAxisSpacing: 16,
         childAspectRatio: 2.5,
         children: [
-          _buildStatCard(Icons.emoji_events_outlined, '1980', 'Total Poin', AppTheme.secondaryGreen),
-          _buildStatCard(Icons.access_time, '105', 'Jam Belajar', AppTheme.primaryGreen),
-          _buildStatCard(Icons.menu_book_outlined, '8', 'Materi\nSelesai', AppTheme.primaryGreen),
-          _buildStatCard(Icons.star_outline, '#4', 'Rangking', AppTheme.secondaryGreen),
+          _buildStatCard(Icons.emoji_events_outlined, '${stats['poin'] ?? 0}', 'Total Poin', AppTheme.secondaryGreen),
+          _buildStatCard(Icons.access_time, '${stats['jam'] ?? 0}', 'Jam Belajar', AppTheme.primaryGreen),
+          _buildStatCard(Icons.menu_book_outlined, '${stats['selesai'] ?? 0}', 'Materi\nSelesai', AppTheme.primaryGreen),
+          _buildStatCard(Icons.star_outline, '#${stats['ranking'] ?? '-'}', 'Rangking', AppTheme.secondaryGreen),
         ],
       ),
     );
@@ -234,13 +300,7 @@ class ProfileScreen extends StatelessWidget {
 
   Widget _buildLogoutButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        // Implement logout logic here
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-        );
-      },
+      onPressed: _logout,
       style: ElevatedButton.styleFrom(
         backgroundColor: AppTheme.redLogout,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
@@ -250,10 +310,7 @@ class ProfileScreen extends StatelessWidget {
       ),
       child: const Text(
         'Logout',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
     );
   }

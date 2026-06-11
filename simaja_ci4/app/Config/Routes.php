@@ -136,4 +136,17 @@ $routes->group('api', function ($routes) {
     // Materi
     $routes->get('materi', 'Api\Materi::index');
     $routes->post('materi/complete', 'Api\Materi::complete');
+
+    // Profile
+    $routes->get('profile', 'Api\Profile::index');
+    $routes->post('profile/update', 'Api\Profile::updateData');
+
+    // Progres & Peringkat
+    $routes->get('progres', 'Api\Progres::index');
+    $routes->get('peringkat', 'Api\Progres::peringkat');
+
+    // Quiz
+    $routes->get('quiz/pertemuan', 'Api\Quiz::listPertemuan'); // List pertemuan berdasarkan materi_id
+    $routes->get('quiz/mulai', 'Api\Quiz::mulai');             // Get soal berdasarkan pertemuan_id
+    $routes->post('quiz/submit', 'Api\Quiz::submit');
 });

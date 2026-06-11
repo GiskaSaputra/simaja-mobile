@@ -196,14 +196,15 @@ class _JadwalScreenState extends State<JadwalScreen> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: isTerdaftar ? () {
-                      // Nanti di AbsensiScreen, kita bisa menangkap parameter ini
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AbsensiScreen(
-                            // Uncomment kode di bawah ini nanti kalau AbsensiScreen sudah siap menerima parameter:
-                            // jadwalId: idJadwal, 
-                            // judulJadwal: data['judul'],
+                          builder: (context) => AbsensiScreen(
+                            // Parameter ini akan ditangkap oleh AbsensiScreen
+                            jadwalId: idJadwal, 
+                            judul: data['judul'] ?? 'Tanpa Judul',
+                            tanggal: data['tanggal'] ?? '-',
+                            waktu: waktu,
                           )
                         ),
                       );

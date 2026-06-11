@@ -1,29 +1,50 @@
 import 'package:flutter/material.dart';
 import '../utils/theme.dart';
-import 'show_belajar_screen.dart'; // 1. Tambahkan import ini
+import '../services/api_service.dart'; // Wajib import ApiService
+import 'show_belajar_screen.dart'; 
 import 'pencarian_screen.dart';
 
-class DetailMateriScreen extends StatelessWidget {
+class DetailMateriScreen extends StatefulWidget {
+  final String materiId;
   final String materiTitle;
 
-  const DetailMateriScreen({super.key, required this.materiTitle});
+  const DetailMateriScreen({
+    super.key, 
+    required this.materiId, 
+    required this.materiTitle
+  });
+
+  @override
+  State<DetailMateriScreen> createState() => _DetailMateriScreenState();
+}
+
+class _DetailMateriScreenState extends State<DetailMateriScreen> {
+  List<dynamic> _pertemuanList = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPertemuan();
+  }
+
+  Future<void> _fetchPertemuan() async {
+    setState(() => _isLoading = true);
+    // Kita manfaatkan getQuizList karena endpoint CI4-nya mengembalikan tabel pertemuan
+    var data = await ApiService.getQuizList(widget.materiId);
+    setState(() {
+      _pertemuanList = data;
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Membuat list dummy Pertemuan 1 - 5
-    final List<String> pertemuanList = [
-      "Pertemuan 1",
-      "Pertemuan 2",
-      "Pertemuan 3",
-      "Pertemuan 4",
-      "Pertemuan 5",
-    ];
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // --- HEADER HIJAU (Persis Figma) ---
+          // --- HEADER HIJAU ---
           Container(
             padding: const EdgeInsets.fromLTRB(24, 60, 24, 30),
             decoration: const BoxDecoration(
@@ -32,7 +53,6 @@ class DetailMateriScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                // Ada tombol back di kiri atas khusus untuk detail materi agar bisa kembali
                 Row(
                   children: [
                     GestureDetector(
@@ -47,7 +67,7 @@ class DetailMateriScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 20), // Penyeimbang agar judul tetap di tengah
+                    const SizedBox(width: 20), 
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -57,9 +77,7 @@ class DetailMateriScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const PencarianScreen(),
-                      ),
+                      MaterialPageRoute(builder: (context) => const PencarianScreen()),
                     );
                   },
                   decoration: InputDecoration(
@@ -80,45 +98,51 @@ class DetailMateriScreen extends StatelessWidget {
 
           // --- LIST KARTU PERTEMUAN ---
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(24),
-              itemCount: pertemuanList.length,
-              itemBuilder: (context, index) {
-                // 2. Bungkus Container dengan GestureDetector disini
-                return GestureDetector(
-                  onTap: () {
-                    // Logika pindah halaman ke ShowBelajarScreen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ShowBelajarScreen(
-                          judulPertemuan: pertemuanList[index], 
-                          materiTitle: materiTitle,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.grey.shade400),
+            child: _isLoading 
+              ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen))
+              : _pertemuanList.isEmpty
+                  ? const Center(child: Text("Belum ada pertemuan untuk materi ini.", style: TextStyle(color: Colors.grey)))
+                  : ListView.builder(
+                      padding: const EdgeInsets.all(24),
+                      itemCount: _pertemuanList.length,
+                      itemBuilder: (context, index) {
+                        final pertemuan = _pertemuanList[index];
+
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ShowBelajarScreen(
+                                  pertemuanId: pertemuan['id'].toString(), // Kirim ID
+                                  judulPertemuan: pertemuan['judul_pertemuan'] ?? 'Pertemuan', 
+                                  materiTitle: widget.materiTitle,
+                                  isiMateri: pertemuan['isi_materi'] ?? '', // Kirim link video/PDF
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 16),
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: Colors.grey.shade400),
+                            ),
+                            child: Text(
+                              pertemuan['judul_pertemuan'] ?? 'Pertemuan ${index + 1}',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                    child: Text(
-                      pertemuanList[index],
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
           ),
         ],
       ),
