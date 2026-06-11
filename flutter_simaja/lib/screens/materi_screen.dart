@@ -91,9 +91,9 @@ class _MateriScreenState extends State<MateriScreen> {
                         itemBuilder: (context, index) {
                           final data = _materiList[index];
                           
-                          // Kalkulasi progress bar
-                          int selesai = data['completed_count'] ?? 0;
-                          int total = data['total_pertemuan'] ?? 0;
+                          // Kalkulasi progress bar (DIUBAH MENJADI AMAN DARI ERROR STRING)
+                          int selesai = int.tryParse(data['completed_count']?.toString() ?? '0') ?? 0;
+                          int total = int.tryParse(data['total_pertemuan']?.toString() ?? '0') ?? 0;
                           double progresValue = total > 0 ? (selesai / total) : 0.0;
 
                           return Card(

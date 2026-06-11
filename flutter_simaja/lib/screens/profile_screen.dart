@@ -73,10 +73,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    // Mengambil nama dan nim, berikan nilai default jika null
-    var biodata = _profileData?['biodata'] ?? {};
-    String namaLengkap = biodata['nama_lengkap'] ?? 'User Baru';
-    String nim = biodata['nim'] ?? 'Belum ada NIM';
+    // FIX: Memastikan tipe datanya Map<String, dynamic>
+    Map<String, dynamic> biodata = {};
+    if (_profileData != null && _profileData!['biodata'] != null) {
+      biodata = Map<String, dynamic>.from(_profileData!['biodata']);
+    }
+
+    String namaLengkap = biodata['nama_lengkap']?.toString() ?? 'User Baru';
+    String nim = biodata['nim']?.toString() ?? 'Belum ada NIM';
 
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -158,7 +162,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildInfoProfil(BuildContext context) {
-    var biodata = _profileData?['biodata'] ?? {};
+    // FIX: Memastikan tipe datanya Map<String, dynamic>
+    Map<String, dynamic> biodata = {};
+    if (_profileData != null && _profileData!['biodata'] != null) {
+      biodata = Map<String, dynamic>.from(_profileData!['biodata']);
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -193,17 +201,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             const SizedBox(height: 16),
-            _buildInfoRow('Kelas', biodata['kelas'] ?? '-'),
+            _buildInfoRow('Kelas', biodata['kelas']?.toString() ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Prodi', biodata['prodi'] ?? '-'),
+            _buildInfoRow('Prodi', biodata['prodi']?.toString() ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Jurusan', biodata['jurusan'] ?? '-'),
+            _buildInfoRow('Jurusan', biodata['jurusan']?.toString() ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Semester', biodata['semester'] ?? '-'),
+            _buildInfoRow('Semester', biodata['semester']?.toString() ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Jenis Kelamin', biodata['jenis_kelamin'] ?? '-'),
+            _buildInfoRow('Jenis Kelamin', biodata['jenis_kelamin']?.toString() ?? '-'),
             const SizedBox(height: 12),
-            _buildInfoRow('Alamat', biodata['alamat'] ?? '-'),
+            _buildInfoRow('Alamat', biodata['alamat']?.toString() ?? '-'),
           ],
         ),
       ),
@@ -243,7 +251,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildStatsGrid() {
-    var stats = _profileData?['stats'] ?? {};
+    // FIX: Memastikan tipe datanya Map<String, dynamic>
+    Map<String, dynamic> stats = {};
+    if (_profileData != null && _profileData!['stats'] != null) {
+      stats = Map<String, dynamic>.from(_profileData!['stats']);
+    }
     
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
