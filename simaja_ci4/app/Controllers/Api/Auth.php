@@ -3,13 +3,15 @@
 namespace App\Controllers\Api;
 
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\UserModel; // Pastikan kamu punya UserModel
+use Myth\Auth\Entities\User;
+use Myth\Auth\Models\UserModel;
 use CodeIgniter\I18n\Time;
 
 class Auth extends ResourceController
 {
     protected $format = 'json';
 
+    // ================= FUNGSI LOGIN =================
     public function login()
     {
         $data = $this->request->getJSON();
@@ -20,7 +22,9 @@ class Auth extends ResourceController
             return $this->fail('Username/Email dan password wajib diisi', 400);
         }
 
+        // Gunakan UserModel bawaan Myth:Auth
         $userModel = new UserModel();
+        
         // Cari user berdasarkan username ATAU email
         $user = $userModel->where('username', $login)
                           ->orWhere('email', $login)
@@ -30,23 +34,39 @@ class Auth extends ResourceController
             return $this->fail('Akun tidak ditemukan.', 404);
         }
 
-        // Cek Password (karena kita pakai password_hash di seeder)
-        if (!password_verify($password, $user['password_hash'])) {
+        // Cek apakah akun sudah aktif (Berdasarkan klik link di email)
+        if ($user->active == 0) {
+            return $this->fail('Akun Anda belum diaktivasi. Silakan cek email Anda.', 401);
+        }
+
+        // Cek Password menggunakan hash bawaan PHP (sesuai standar Myth:Auth)
+        if (!password_verify($password, $user->password_hash)) {
             return $this->fail('Password salah.', 401);
         }
+
+        // Ambil nama role/group dari tabel auth_groups_users (Agar sinkron dengan Web)
+        $db = \Config\Database::connect();
+        $roleQuery = $db->table('auth_groups_users')
+                        ->select('auth_groups.name as role')
+                        ->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id')
+                        ->where('user_id', $user->id)
+                        ->get()->getRow();
+
+        $role = $roleQuery ? $roleQuery->role : 'user';
 
         return $this->respond([
             'status' => 200,
             'message' => 'Login berhasil',
             'data' => [
-                'id' => $user['id'],
-                'username' => $user['username'],
-                'email' => $user['email'],
-                'role' => $user['role']
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'role' => $role
             ]
         ]);
     }
 
+    // ================= FUNGSI REGISTER =================
     public function register()
     {
         $data = $this->request->getJSON();
@@ -69,15 +89,48 @@ class Auth extends ResourceController
             return $this->fail('Username sudah dipakai', 409);
         }
 
-        // Simpan user baru
-        $userModel->save([
+        // Gunakan Entity Myth:Auth agar password di-hash secara otomatis
+        $userEntity = new User([
+            'email'    => $email,
             'username' => $username,
-            'email' => $email,
-            'password_hash' => password_hash($password, PASSWORD_DEFAULT),
-            'role' => 'user',
-            'active' => 1,
-            'created_at' => Time::now()
+            'password' => $password,
+            // active tidak di-set manual di sini, biarkan Myth:Auth yang mengatur
         ]);
+
+        // Simpan ke tabel users
+        $userModel->save($userEntity);
+        $userId = $userModel->getInsertID();
+
+        // --- MASUKKAN KE TABEL ROLE (GROUP) ---
+        $db = \Config\Database::connect();
+        $group = $db->table('auth_groups')->where('name', 'user')->get()->getRow();
+        
+        if ($group) {
+            $db->table('auth_groups_users')->insert([
+                'group_id' => $group->id,
+                'user_id'  => $userId
+            ]);
+        }
+
+        // --- PROSES KIRIM EMAIL AKTIVASI ---
+        $config = config('Auth');
+        if ($config->requireActivation !== null) {
+            $activator = service('activator');
+            $user = $userModel->find($userId); // Tarik ulang data user beserta hash-nya
+            
+            // Eksekusi pengiriman email via SMTP CI4
+            if (! $activator->send($user)) {
+                return $this->fail('Gagal mengirim email aktivasi. Cek konfigurasi SMTP Anda.', 500);
+            }
+
+            return $this->respondCreated([
+                'status' => 201,
+                'message' => 'Registrasi berhasil! Silakan cek email Anda untuk mengaktifkan akun sebelum login.'
+            ]);
+        }
+
+        // Jika fitur aktivasi email sedang dimatikan di Config, paksa active = 1
+        $userModel->update($userId, ['active' => 1]);
 
         return $this->respondCreated([
             'status' => 201,
@@ -85,26 +138,20 @@ class Auth extends ResourceController
         ]);
     }
 
+    // ================= FUNGSI FORGOT PASSWORD =================
     public function forgot()
     {
         $data = $this->request->getJSON();
         $email = $data->email ?? null;
 
-        if (!$email) {
-            return $this->fail('Email wajib diisi', 400);
-        }
+        if (!$email) return $this->fail('Email wajib diisi', 400);
 
         $userModel = new UserModel();
         $user = $userModel->where('email', $email)->first();
 
-        if (!$user) {
-            return $this->fail('Email tidak terdaftar di sistem kami.', 404);
-        }
+        if (!$user) return $this->fail('Email tidak terdaftar di sistem kami.', 404);
 
-        // Catatan: Di aplikasi nyata (Production), di sini adalah tempat untuk
-        // menaruh kodingan SMTP Email untuk mengirim link reset sungguhan.
-        // Untuk saat ini, kita kembalikan status sukses ke aplikasi Flutter.
-
+        // Jika ingin menghubungkan proses forgot password email sungguhan, letakkan di sini
         return $this->respond([
             'status' => 200,
             'message' => 'Instruksi reset password telah dikirim ke email Anda.'
@@ -118,9 +165,7 @@ class Auth extends ResourceController
         $token = $data->token ?? null;
         $newPassword = $data->password ?? null;
 
-        if (!$token || !$newPassword) {
-            return $this->fail('Token dan password baru wajib diisi', 400);
-        }
+        if (!$token || !$newPassword) return $this->fail('Token dan password baru wajib diisi', 400);
 
         $userModel = new UserModel();
         
@@ -129,19 +174,17 @@ class Auth extends ResourceController
                           ->where('reset_expires >=', Time::now()->format('Y-m-d H:i:s'))
                           ->first();
 
-        if (!$user) {
-            return $this->fail('Token tidak valid atau sudah kedaluwarsa.', 400);
-        }
+        if (!$user) return $this->fail('Token tidak valid atau sudah kedaluwarsa.', 400);
 
-        // Update password baru dan hanguskan token-nya
-        $userModel->update($user['id'], [
-            'password_hash' => password_hash($newPassword, PASSWORD_DEFAULT),
+        // Update menggunakan sistem Hash bawaan Myth:Auth
+        $userModel->update($user->id, [
+            'password_hash' => \Myth\Auth\Password::hash($newPassword),
             'reset_hash' => null,
             'reset_expires' => null
         ]);
 
         return $this->respond([
-            'status' => 200,
+            'status' => 200, 
             'message' => 'Password berhasil direset. Silakan login menggunakan password baru.'
         ]);
     }
@@ -149,15 +192,9 @@ class Auth extends ResourceController
     // ================= FUNGSI LOGOUT =================
     public function logout()
     {
-        // Pada API Mobile yang menggunakan JWT/Token, proses logout biasanya 
-        // hanya menghapus sesi di penyimpanan lokal aplikasi (SharedPreferences).
-        // Kita sediakan endpoint ini sebagai formalitas API yang baik.
-        
         return $this->respond([
             'status' => 200,
             'message' => 'Logout berhasil.'
         ]);
     }
-
-
 }

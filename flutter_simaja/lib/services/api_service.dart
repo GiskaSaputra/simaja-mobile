@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io'; // Tambahan wajib untuk membaca File gambar
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +9,11 @@ class ApiService {
   static const String baseUrl = kIsWeb 
       ? 'http://localhost:8080/api' 
       : 'http://10.0.2.2:8080/api';
+
+  // TAMBAHAN: Base URL khusus untuk memuat gambar dari folder public/img CI4
+  static const String baseImageUrl = kIsWeb 
+      ? 'http://localhost:8080/img/' 
+      : 'http://10.0.2.2:8080/img/';
 
   // ==========================================================================
   // 1. FUNGSI AUTENTIKASI (LOGIN, REGISTER, FORGOT PASSWORD)
@@ -242,23 +248,46 @@ class ApiService {
     return null;
   }
 
-  static Future<Map<String, dynamic>> updateProfile(Map<String, dynamic> profileData) async {
+  // UPDATE PROFIL (DIROMBAK AGAR BISA MENGIRIM FILE GAMBAR VIA MULTIPART)
+  static Future<Map<String, dynamic>> updateProfile(Map<String, dynamic> profileData, {File? imageFile}) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? userId = prefs.getString('user_id');
       if (userId == null) return {'success': false, 'message': 'Sesi login tidak ditemukan'};
 
-      profileData['user_id'] = userId; // Sisipkan user ID
+      // Buat request Multipart (bukan JSON lagi)
+      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/profile/update'));
 
-      final response = await http.post(
-        Uri.parse('$baseUrl/profile/update'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(profileData),
-      ).timeout(const Duration(seconds: 10));
+      // Masukkan User ID
+      request.fields['user_id'] = userId;
 
-      if (response.body.contains('<html')) return {'success': false, 'message': 'Terjadi error di CI4.'};
+      // Masukkan semua data form (nama, nim, alamat, dll) secara aman
+      profileData.forEach((key, value) {
+        if (value != null) {
+          request.fields[key] = value.toString();
+        }
+      });
 
-      final data = jsonDecode(response.body);
+      // Sisipkan file gambar jika pengguna memilih foto baru
+      if (imageFile != null) {
+        var stream = http.ByteStream(imageFile.openRead());
+        var length = await imageFile.length();
+        var multipartFile = http.MultipartFile(
+          'foto', // Sesuai dengan $this->request->getFile('foto') di CI4
+          stream,
+          length,
+          filename: imageFile.path.split('/').last,
+        );
+        request.files.add(multipartFile);
+      }
+
+      // Kirim request ke CI4
+      var response = await request.send();
+      var responseData = await response.stream.bytesToString();
+
+      if (responseData.contains('<html')) return {'success': false, 'message': 'Terjadi error di CI4.'};
+
+      var data = jsonDecode(responseData);
       if (response.statusCode == 200) {
         return {'success': true, 'message': data['message']};
       } else {
@@ -368,5 +397,4 @@ class ApiService {
       return {'success': false, 'message': 'Gagal terhubung ke server!'};
     }
   }
-
 }

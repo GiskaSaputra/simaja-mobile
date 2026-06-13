@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    // FIX: Memastikan tipe datanya Map<String, dynamic>
+    // Memastikan tipe datanya Map<String, dynamic>
     Map<String, dynamic> biodata = {};
     if (_profileData != null && _profileData!['biodata'] != null) {
       biodata = Map<String, dynamic>.from(_profileData!['biodata']);
@@ -129,11 +129,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               children: [
                 const SizedBox(width: 16),
-                const CircleAvatar(
+                
+                // MENAMPILKAN FOTO PROFIL DARI DATABASE CI4
+                CircleAvatar(
                   radius: 24,
-                  backgroundColor: Colors.grey,
-                  child: Icon(Icons.person, color: Colors.white, size: 32),
+                  backgroundColor: Colors.grey.shade300,
+                  backgroundImage: (biodata['foto'] != null && biodata['foto'] != 'default.png')
+                      ? NetworkImage('${ApiService.baseImageUrl}${biodata['foto']}')
+                      : null,
+                  child: (biodata['foto'] == null || biodata['foto'] == 'default.png')
+                      ? const Icon(Icons.person, color: Colors.white, size: 32)
+                      : null,
                 ),
+
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
@@ -162,7 +170,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildInfoProfil(BuildContext context) {
-    // FIX: Memastikan tipe datanya Map<String, dynamic>
     Map<String, dynamic> biodata = {};
     if (_profileData != null && _profileData!['biodata'] != null) {
       biodata = Map<String, dynamic>.from(_profileData!['biodata']);
@@ -189,13 +196,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 IconButton(
                   icon: const Icon(Icons.edit_square, color: AppTheme.textDark),
                   onPressed: () {
-                    // Pindah ke halaman edit sambil membawa data saat ini
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => EditProfileScreen(currentData: biodata),
                       ),
-                    ).then((_) => _fetchProfile()); // Refresh saat kembali
+                    ).then((_) => _fetchProfile()); 
                   },
                 ),
               ],
@@ -251,7 +257,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildStatsGrid() {
-    // FIX: Memastikan tipe datanya Map<String, dynamic>
     Map<String, dynamic> stats = {};
     if (_profileData != null && _profileData!['stats'] != null) {
       stats = Map<String, dynamic>.from(_profileData!['stats']);

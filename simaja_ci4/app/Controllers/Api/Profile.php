@@ -20,18 +20,12 @@ class Profile extends ResourceController
         $nilaiModel = new NilaiModel();
         $progressModel = new UserProgressModel();
 
-        // 1. Ambil Biodata
         $userProfile = $profileModel->where('user_id', $userId)->first();
-
-        // 2. Hitung Total Poin
         $totalPoinArr = $nilaiModel->where('user_id', $userId)->selectSum('skor')->first();
         $totalPoin = $totalPoinArr['skor'] ?? 0;
-
-        // 3. Hitung Jam Belajar (1 materi selesai = 2 jam)
         $materiSelesai = $progressModel->where(['user_id' => $userId, 'is_completed' => 1])->countAllResults();
         $jamBelajar = $materiSelesai * 2; 
 
-        // 4. Hitung Ranking
         $db = \Config\Database::connect();
         $query = $db->query("SELECT user_id, SUM(skor) as total_skor FROM nilai GROUP BY user_id ORDER BY total_skor DESC");
         $rankings = $query->getResultArray();
@@ -61,25 +55,42 @@ class Profile extends ResourceController
 
     public function updateData()
     {
-        $data = $this->request->getJSON();
-        $userId = $data->user_id ?? null;
-
+        // 1. Tangkap User ID dari POST (Bukan JSON lagi)
+        $userId = $this->request->getPost('user_id');
         if (!$userId) return $this->fail('User ID wajib dikirim', 400);
 
         $profileModel = new ProfileModel();
         $profile = $profileModel->where('user_id', $userId)->first();
 
+        // 2. Tangkap data teks
         $updateData = [
-            'nama_lengkap'  => $data->nama_lengkap ?? ($profile['nama_lengkap'] ?? null),
-            'nim'           => $data->nim ?? ($profile['nim'] ?? null),
-            'kelas'         => $data->kelas ?? ($profile['kelas'] ?? null),
-            'prodi'         => $data->prodi ?? ($profile['prodi'] ?? null),
-            'jurusan'       => $data->jurusan ?? ($profile['jurusan'] ?? null),
-            'semester'      => $data->semester ?? ($profile['semester'] ?? null),
-            'jenis_kelamin' => $data->jenis_kelamin ?? ($profile['jenis_kelamin'] ?? null),
-            'alamat'        => $data->alamat ?? ($profile['alamat'] ?? null),
+            'nama_lengkap'  => $this->request->getPost('nama_lengkap') ?? ($profile['nama_lengkap'] ?? null),
+            'nim'           => $this->request->getPost('nim') ?? ($profile['nim'] ?? null),
+            'kelas'         => $this->request->getPost('kelas') ?? ($profile['kelas'] ?? null),
+            'prodi'         => $this->request->getPost('prodi') ?? ($profile['prodi'] ?? null),
+            'jurusan'       => $this->request->getPost('jurusan') ?? ($profile['jurusan'] ?? null),
+            'semester'      => $this->request->getPost('semester') ?? ($profile['semester'] ?? null),
+            'jenis_kelamin' => $this->request->getPost('jenis_kelamin') ?? ($profile['jenis_kelamin'] ?? null),
+            'alamat'        => $this->request->getPost('alamat') ?? ($profile['alamat'] ?? null),
         ];
 
+        // 3. Tangkap File Foto (Jika ada)
+        $fileFoto = $this->request->getFile('foto');
+        
+        if ($fileFoto && $fileFoto->isValid() && !$fileFoto->hasMoved()) {
+            $namaFoto = $fileFoto->getRandomName();
+            $fileFoto->move('img', $namaFoto); // Simpan ke folder public/img
+            $updateData['foto'] = $namaFoto;
+
+            // Hapus foto lama jika bukan default
+            if ($profile && !empty($profile['foto']) && $profile['foto'] != 'default.png') {
+                if (file_exists('img/' . $profile['foto'])) {
+                    unlink('img/' . $profile['foto']);
+                }
+            }
+        }
+
+        // 4. Simpan ke database
         if ($profile) {
             $profileModel->update($profile['id'], $updateData);
         } else {
